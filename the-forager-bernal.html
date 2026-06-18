@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Forager | The New Bernal Times</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&family=Franklin+Gothic+Medium&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --nbt-black: #121212;
+    --nbt-white: #fff;
+    --nbt-gray: #727272;
+    --nbt-light: #f7f7f5;
+    --nbt-rule: #e2e2e2;
+    --nbt-accent: #C8102E;
+    --nbt-serif: 'Playfair Display', 'Georgia', serif;
+    --nbt-body: 'Source Serif 4', 'Georgia', serif;
+    --nbt-sans: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--nbt-white);
+    color: var(--nbt-black);
+    font-family: var(--nbt-body);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    border-bottom: 3px double var(--nbt-black);
+    padding: 10px 0 0;
+    text-align: center;
+    background: var(--nbt-white);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .masthead-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 6px;
+    border-bottom: 1px solid var(--nbt-rule);
+  }
+  .masthead-date {
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--nbt-gray);
+    text-transform: uppercase;
+  }
+  .masthead-name {
+    font-family: var(--nbt-serif);
+    font-size: clamp(22px, 4vw, 38px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    padding: 8px 0 6px;
+  }
+  .masthead-tagline {
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--nbt-gray);
+  }
+  .masthead-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 6px 0;
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .masthead-nav a { text-decoration: none; color: var(--nbt-black); }
+  .masthead-nav a:hover { text-decoration: underline; }
+  .section-label {
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--nbt-accent);
+    border-top: 2px solid var(--nbt-accent);
+    display: inline-block;
+    padding-top: 4px;
+    margin-bottom: 4px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .article-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  .hed {
+    font-family: var(--nbt-serif);
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 12px 0 8px;
+  }
+  .dek {
+    font-family: var(--nbt-body);
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .byline-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid var(--nbt-rule);
+    border-bottom: 1px solid var(--nbt-rule);
+    padding: 10px 0;
+    margin-bottom: 28px;
+  }
+  .byline-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c8a882, #a0785a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--nbt-serif);
+    font-size: 14px;
+    color: white;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .byline-text {
+    font-family: var(--nbt-sans);
+    font-size: 12px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .byline-text strong { color: var(--nbt-black); }
+  .byline-text span { color: var(--nbt-gray); text-transform: none; letter-spacing: 0; }
+
+  /* ─── HERO IMAGE ─── */
+  .hero-figure {
+    margin: 0 -20px 28px;
+    background: #e8e4de;
+    position: relative;
+  }
+  .hero-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-svg {
+    width: 100%;
+    height: 420px;
+    display: block;
+  }
+  figcaption {
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    color: var(--nbt-gray);
+    padding: 6px 20px;
+    line-height: 1.4;
+  }
+
+  /* ─── BODY COPY ─── */
+  .article-body p {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 22px;
+    font-weight: 300;
+  }
+  .article-body p:first-of-type::first-letter {
+    font-family: var(--nbt-serif);
+    font-size: 72px;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin: 8px 8px 0 0;
+    color: var(--nbt-black);
+  }
+
+  .pull-quote {
+    border-top: 3px solid var(--nbt-black);
+    border-bottom: 1px solid var(--nbt-black);
+    padding: 18px 0;
+    margin: 36px 0;
+  }
+  .pull-quote p {
+    font-family: var(--nbt-serif);
+    font-size: 24px !important;
+    font-style: italic;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+  }
+  .pull-quote p::first-letter { all: unset; }
+
+  hr.section-rule {
+    border: none;
+    border-top: 1px solid var(--nbt-rule);
+    margin: 40px 0;
+  }
+
+  /* ─── HOME CARDS ─── */
+  .homes-intro {
+    font-family: var(--nbt-sans);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color: var(--nbt-gray);
+    margin: 40px 0 20px;
+  }
+  .home-card {
+    border: 1px solid var(--nbt-rule);
+    margin-bottom: 48px;
+    background: var(--nbt-white);
+  }
+  .home-card-header {
+    background: var(--nbt-black);
+    color: var(--nbt-white);
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--nbt-sans);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .home-number {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .home-illustration {
+    width: 100%;
+    height: 260px;
+    background: #e8e4de;
+    display: block;
+    border-bottom: 1px solid var(--nbt-rule);
+  }
+  .home-details {
+    padding: 20px 20px 4px;
+  }
+  .home-address {
+    font-family: var(--nbt-serif);
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .home-neighborhood {
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--nbt-gray);
+    margin-bottom: 14px;
+  }
+  .home-specs {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--nbt-rule);
+    border-bottom: 1px solid var(--nbt-rule);
+    margin-bottom: 16px;
+  }
+  .home-spec {
+    flex: 1;
+    text-align: center;
+    padding: 10px 4px;
+    border-right: 1px solid var(--nbt-rule);
+  }
+  .home-spec:last-child { border-right: none; }
+  .spec-value {
+    font-family: var(--nbt-serif);
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+  }
+  .spec-label {
+    font-family: var(--nbt-sans);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--nbt-gray);
+  }
+  .home-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+  }
+  .home-listed {
+    font-family: var(--nbt-sans);
+    font-size: 12px;
+    color: var(--nbt-gray);
+  }
+  .home-listed strong {
+    font-family: var(--nbt-serif);
+    font-size: 16px;
+    color: var(--nbt-black);
+  }
+  .home-sold-badge {
+    font-family: var(--nbt-sans);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--nbt-black);
+    color: var(--nbt-white);
+    padding: 3px 8px;
+  }
+  .home-desc {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+  }
+  .home-desc::first-letter { all: unset !important; }
+  .home-pros-cons {
+    background: var(--nbt-light);
+    padding: 14px 16px;
+    margin: 0 -20px 20px;
+  }
+  .pros-cons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .pros-label, .cons-label {
+    font-family: var(--nbt-sans);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .pros-label { color: #2d6a4f; }
+  .cons-label { color: #c0392b; }
+  .pros-cons-list {
+    list-style: none;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .pros-cons-list li {
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .pros-list li::before { content: '+'; position: absolute; left: 0; color: #2d6a4f; font-weight: bold; }
+  .cons-list li::before { content: '–'; position: absolute; left: 0; color: #c0392b; font-weight: bold; }
+
+  /* ─── QUIZ ─── */
+  .quiz-section {
+    background: var(--nbt-black);
+    color: var(--nbt-white);
+    padding: 36px 28px;
+    margin: 48px -20px;
+    text-align: center;
+  }
+  .quiz-eyebrow {
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #aaa;
+    margin-bottom: 10px;
+  }
+  .quiz-question {
+    font-family: var(--nbt-serif);
+    font-size: 26px;
+    font-style: italic;
+    line-height: 1.25;
+    margin-bottom: 28px;
+  }
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .quiz-btn {
+    background: transparent;
+    border: 1.5px solid #555;
+    color: var(--nbt-white);
+    padding: 16px 10px;
+    cursor: pointer;
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .quiz-btn:hover { border-color: var(--nbt-white); background: rgba(255,255,255,0.08); }
+  .quiz-btn.selected { border-color: #c8a44a; background: rgba(200,164,74,0.15); color: #c8a44a; }
+  .quiz-btn.correct { border-color: #4caf50; background: rgba(76,175,80,0.15); color: #81c784; }
+  .quiz-btn.wrong { border-color: #ef5350; background: rgba(239,83,80,0.1); color: #ef9a9a; }
+  .quiz-btn .btn-num {
+    display: block;
+    font-size: 22px;
+    font-family: var(--nbt-serif);
+    font-style: italic;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+  .quiz-result {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 1px solid #333;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #ccc;
+  }
+  .quiz-result.visible { display: block; }
+  .quiz-result strong { color: var(--nbt-white); }
+  .see-answer-btn {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 8px;
+    display: block;
+    width: 100%;
+  }
+  .see-answer-btn:hover { color: var(--nbt-white); }
+
+  /* ─── REVEAL ─── */
+  .reveal-section {
+    border-top: 3px solid var(--nbt-black);
+    padding-top: 28px;
+    margin-top: 8px;
+  }
+  .reveal-eyebrow {
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--nbt-accent);
+    margin-bottom: 10px;
+  }
+  .reveal-hed {
+    font-family: var(--nbt-serif);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .final-price-box {
+    background: var(--nbt-light);
+    border-left: 4px solid var(--nbt-black);
+    padding: 16px 20px;
+    margin: 28px 0;
+  }
+  .final-price-label {
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--nbt-gray);
+    margin-bottom: 4px;
+  }
+  .final-price {
+    font-family: var(--nbt-serif);
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .final-price-sub {
+    font-family: var(--nbt-sans);
+    font-size: 12px;
+    color: var(--nbt-gray);
+    margin-top: 4px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 3px double var(--nbt-black);
+    text-align: center;
+    padding: 24px 20px;
+    font-family: var(--nbt-sans);
+    font-size: 11px;
+    color: var(--nbt-gray);
+    letter-spacing: 0.06em;
+  }
+  footer .footer-logo {
+    font-family: var(--nbt-serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--nbt-black);
+    display: block;
+    margin-bottom: 6px;
+  }
+  footer p { margin-top: 6px; line-height: 1.5; }
+
+  /* ─── MAP ILLUSTRATION ─── */
+  .map-figure {
+    margin: 32px -20px 8px;
+    background: #f0ede6;
+    border-top: 1px solid var(--nbt-rule);
+    border-bottom: 1px solid var(--nbt-rule);
+    overflow: hidden;
+  }
+
+  @media (max-width: 540px) {
+    .quiz-options { grid-template-columns: 1fr; }
+    .pros-cons-grid { grid-template-columns: 1fr; }
+    .home-specs { flex-wrap: wrap; }
+    .home-spec { flex: 1 0 33%; }
+    .masthead-nav { flex-wrap: wrap; gap: 10px; padding: 6px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ MASTHEAD ═══════════════════════════ -->
+<header class="masthead">
+  <div class="masthead-top">
+    <div class="masthead-date">Wednesday, June 18, 2026</div>
+    <div class="masthead-tagline">All the Homes Fit to Print</div>
+  </div>
+  <div class="masthead-name">The New Bernal Times</div>
+  <nav class="masthead-nav">
+    <a href="#">Real Estate</a>
+    <a href="#">The Forager</a>
+    <a href="#">Neighborhood</a>
+    <a href="#">Open Houses</a>
+    <a href="#">Opinion</a>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════ ARTICLE ═══════════════════════════ -->
+<main class="article-wrapper">
+
+  <div class="section-label">The Forager</div>
+
+  <h1 class="hed">Looking for a Starter Home on the Sunny Side of Bernal Heights</h1>
+  <p class="dek">A nurse and a software engineer had a modest wish list — original details, a backyard for a future dog, and a street where they could picture growing old. The asking prices, however, had other plans.</p>
+
+  <div class="byline-block">
+    <div class="byline-avatar">RP</div>
+    <div class="byline-text">
+      <strong>By Rosalind Pacheco</strong><br>
+      <span>New Bernal Times Real Estate Correspondent · June 18, 2026</span>
+    </div>
+  </div>
+
+  <!-- Hero illustration -->
+  <figure class="hero-figure">
+    <svg class="hero-svg" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sky -->
+      <rect width="680" height="420" fill="#dde8f0"/>
+      <!-- Hill silhouette -->
+      <ellipse cx="340" cy="520" rx="480" ry="260" fill="#c8d9a0"/>
+      <!-- Sutro Tower hint -->
+      <g opacity="0.18">
+        <rect x="308" y="60" width="4" height="80" fill="#334"/>
+        <rect x="296" y="80" width="28" height="3" fill="#334"/>
+        <rect x="300" y="95" width="20" height="3" fill="#334"/>
+      </g>
+      <!-- House row -->
+      <!-- House A -->
+      <rect x="80" y="210" width="100" height="130" fill="#c9b49a"/>
+      <polygon points="80,210 180,210 130,155" fill="#8c6e52"/>
+      <rect x="105" y="255" width="28" height="40" fill="#6b4f3a" rx="2"/>
+      <rect x="145" y="248" width="22" height="22" fill="#b8d4e8" rx="1"/>
+      <rect x="88" y="248" width="14" height="14" fill="#b8d4e8" rx="1"/>
+      <!-- House B (highlighted, center) -->
+      <rect x="215" y="195" width="120" height="145" fill="#e8ddd0"/>
+      <polygon points="215,195 335,195 275,132" fill="#a0795c"/>
+      <rect x="246" y="245" width="34" height="50" fill="#5c3d28" rx="2"/>
+      <rect x="215" y="230" width="25" height="25" fill="#cce0ef" rx="1"/>
+      <rect x="296" y="230" width="25" height="25" fill="#cce0ef" rx="1"/>
+      <!-- Flower boxes -->
+      <rect x="215" y="254" width="25" height="6" fill="#c8a882" rx="1"/>
+      <circle cx="219" cy="251" r="4" fill="#d45f5f"/>
+      <circle cx="226" cy="249" r="4" fill="#e8906a"/>
+      <circle cx="233" cy="251" r="4" fill="#d45f5f"/>
+      <!-- House C -->
+      <rect x="375" y="218" width="95" height="122" fill="#d4c4b0"/>
+      <polygon points="375,218 470,218 422,165" fill="#906a4c"/>
+      <rect x="398" y="265" width="26" height="42" fill="#6b4a30" rx="2"/>
+      <rect x="375" y="250" width="20" height="20" fill="#b8d4e8" rx="1"/>
+      <rect x="450" y="250" width="16" height="20" fill="#b8d4e8" rx="1"/>
+      <!-- House D smaller -->
+      <rect x="500" y="240" width="75" height="100" fill="#c2b49e"/>
+      <polygon points="500,240 575,240 537,198" fill="#8c6e52"/>
+      <rect x="519" y="278" width="20" height="36" fill="#6b4f3a" rx="2"/>
+      <!-- Trees -->
+      <circle cx="195" cy="240" r="22" fill="#7a9e5e"/>
+      <rect x="192" y="252" width="6" height="25" fill="#6b4f3a"/>
+      <circle cx="360" cy="248" r="18" fill="#6b8f4e"/>
+      <rect x="357" y="258" width="6" height="22" fill="#6b4f3a"/>
+      <circle cx="490" cy="252" r="14" fill="#7a9e5e"/>
+      <!-- Street -->
+      <rect x="0" y="335" width="680" height="85" fill="#b8b0a4"/>
+      <!-- Street details -->
+      <rect x="0" y="340" width="680" height="3" fill="#999"/>
+      <rect x="60" y="354" width="40" height="3" fill="#e8e0d0"/>
+      <rect x="160" y="354" width="40" height="3" fill="#e8e0d0"/>
+      <rect x="260" y="354" width="40" height="3" fill="#e8e0d0"/>
+      <rect x="360" y="354" width="40" height="3" fill="#e8e0d0"/>
+      <rect x="460" y="354" width="40" height="3" fill="#e8e0d0"/>
+      <rect x="560" y="354" width="40" height="3" fill="#e8e0d0"/>
+      <!-- Couple silhouettes -->
+      <circle cx="290" cy="318" r="9" fill="#5a4030"/>
+      <rect x="284" y="327" width="12" height="20" fill="#4a6080" rx="2"/>
+      <circle cx="308" cy="321" r="8" fill="#7a5040"/>
+      <rect x="302" y="329" width="11" height="18" fill="#c0705a" rx="2"/>
+      <!-- Caption area -->
+      <rect x="0" y="390" width="680" height="30" fill="#e8e4de" opacity="0.8"/>
+      <text x="12" y="408" font-family="Arial, sans-serif" font-size="11" fill="#727272">Illustration by the New Bernal Times | Elsie Street, Bernal Heights, San Francisco</text>
+    </svg>
+    <figcaption>The couple spent seven months searching Bernal Heights before finding a home they could call their own. Illustration by New Bernal Times Studio.</figcaption>
+  </figure>
+
+  <!-- Body -->
+  <div class="article-body">
+    <p>Maya Tran and Daniel Osei had been renting a two-bedroom apartment on Precita Avenue for four years when their landlord announced he was selling the building. He was very sorry, he said. The market had been very, very good to him.</p>
+
+    <p>Maya, 33, is a labor and delivery nurse at UCSF Medical Center. Daniel, 35, writes software for a climate-tech startup headquartered in the Dogpatch. Together they earn just over $310,000 a year — a figure that, in any other American city, might have them browsing four-bedroom Colonials with a guest suite. In Bernal Heights, it meant they needed to be "realistic," a word that came up constantly in conversation and that they both deployed with the practiced resignation of people who have been to many open houses.</p>
+
+    <p>"We weren't asking for much," Maya said, stirring a cortado at the Bernal Bean on Cortland Avenue. "Two bedrooms. One and a half baths if we were lucky. A backyard — even a small one — for the dog we keep promising ourselves. And we wanted to stay in Bernal. We've built a life here."</p>
+
+    <div class="pull-quote">
+      <p>"We kept telling ourselves: it's just a house. And then we'd walk in and it would smell like someone else's laundry and we'd fall in love anyway."</p>
+    </div>
+
+    <p>Their budget was $1.5 million, which they arrived at through a combination of savings, help from Daniel's parents in Accra, and a deep and perhaps delusional optimism. Their agent, a veteran of the Bernal market named Cecelia Ruiz, gently informed them that $1.5 million was, in her words, "a conversation starter."</p>
+
+    <p>"Cecelia kept saying 'offers over,'" Daniel recalled. "Every listing. Offers over. I started having dreams where everything in life was 'offers over.' My coffee. My parking spot."</p>
+
+    <p>They attended 22 open houses over seven months. They lost three offers — two at asking, one $80,000 over. They cried once, in a car on Andover Street, before pulling themselves together and driving to Tartine for consolation croissants.</p>
+
+    <p>Then, in a span of ten days in March, three homes became available within six blocks of their rental. Cecelia called it a "micro-surge." Maya called it "the universe finally getting its act together." They moved quickly.</p>
+  </div>
+
+  <!-- ─── HOME CARDS ─── -->
+  <p class="homes-intro">The Three Contenders</p>
+
+  <!-- HOME 1 -->
+  <div class="home-card" id="home1">
+    <div class="home-card-header">
+      <span class="home-number">Home 1</span>
+      <span>116 Elsie Street</span>
+    </div>
+    <svg class="home-illustration" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sky -->
+      <rect width="680" height="260" fill="#e8eff5"/>
+      <!-- Neighbor house left -->
+      <rect x="0" y="90" width="140" height="170" fill="#c4b89e"/>
+      <polygon points="0,90 140,90 70,38" fill="#a08060"/>
+      <rect x="20" y="130" width="30" height="30" fill="#b0ccd8"/>
+      <rect x="85" y="130" width="30" height="30" fill="#b0ccd8"/>
+      <rect x="48" y="160" width="24" height="70" fill="#7a5c40"/>
+      <!-- Main house -->
+      <rect x="155" y="65" width="220" height="195" fill="#e8ddd0"/>
+      <polygon points="155,65 375,65 265,5" fill="#b09070"/>
+      <!-- Bay window -->
+      <rect x="168" y="115" width="65" height="70" fill="#f0e8dc"/>
+      <rect x="168" y="115" width="65" height="5" fill="#b09070"/>
+      <rect x="168" y="145" width="65" height="3" fill="#c4a88a"/>
+      <rect x="173" y="120" width="18" height="22" fill="#b8d4e8"/>
+      <rect x="195" y="120" width="18" height="22" fill="#b8d4e8"/>
+      <rect x="217" y="120" width="12" height="22" fill="#b8d4e8"/>
+      <rect x="173" y="148" width="18" height="20" fill="#b8d4e8"/>
+      <rect x="195" y="148" width="18" height="20" fill="#b8d4e8"/>
+      <rect x="217" y="148" width="12" height="20" fill="#b8d4e8"/>
+      <!-- Door -->
+      <rect x="263" y="185" width="36" height="75" fill="#6b4a30" rx="3"/>
+      <circle cx="296" cy="224" r="3" fill="#c8a44a"/>
+      <rect x="270" y="193" width="12" height="18" fill="#9ab8c8"/>
+      <rect x="285" y="193" width="10" height="18" fill="#9ab8c8"/>
+      <!-- Upper window -->
+      <rect x="295" y="110" width="50" height="45" fill="#b8d4e8"/>
+      <rect x="319" y="110" width="2" height="45" fill="#b09070"/>
+      <rect x="295" y="131" width="50" height="2" fill="#b09070"/>
+      <!-- Stoop steps -->
+      <rect x="248" y="255" width="66" height="5" fill="#c4b49e"/>
+      <rect x="253" y="250" width="56" height="5" fill="#ccc0a8"/>
+      <!-- Flower box -->
+      <rect x="168" y="184" width="65" height="8" fill="#c8a882" rx="1"/>
+      <circle cx="178" cy="181" r="5" fill="#e05050"/>
+      <circle cx="190" cy="179" r="5" fill="#e87858"/>
+      <circle cx="202" cy="181" r="5" fill="#e05050"/>
+      <circle cx="214" cy="179" r="4" fill="#f0a030"/>
+      <circle cx="224" cy="181" r="4" fill="#e05050"/>
+      <!-- Neighbor right -->
+      <rect x="395" y="80" width="130" height="180" fill="#c8baa4"/>
+      <polygon points="395,80 525,80 460,28" fill="#a08868"/>
+      <rect x="415" y="120" width="28" height="28" fill="#b0ccd8"/>
+      <rect x="460" y="120" width="28" height="28" fill="#b0ccd8"/>
+      <rect x="432" y="175" width="22" height="65" fill="#7a5c40"/>
+      <!-- Far right filler -->
+      <rect x="535" y="100" width="145" height="160" fill="#b8ac98" opacity="0.6"/>
+      <!-- Garden / sidewalk -->
+      <rect x="0" y="245" width="680" height="15" fill="#b8b0a0"/>
+      <rect x="155" y="238" width="220" height="10" fill="#c8c0b0"/>
+      <!-- Street number -->
+      <text x="265" y="80" font-family="Georgia, serif" font-size="13" fill="#8a6a4a" text-anchor="middle" font-weight="bold">116</text>
+    </svg>
+    <div class="home-details">
+      <div class="home-address">116 Elsie Street</div>
+      <div class="home-neighborhood">Bernal Heights · San Francisco, CA 94110</div>
+      <div class="home-specs">
+        <div class="home-spec"><span class="spec-value">2</span><span class="spec-label">Beds</span></div>
+        <div class="home-spec"><span class="spec-value">1</span><span class="spec-label">Baths</span></div>
+        <div class="home-spec"><span class="spec-value">840</span><span class="spec-label">Sq Ft</span></div>
+        <div class="home-spec"><span class="spec-value">1906</span><span class="spec-label">Built</span></div>
+        <div class="home-spec"><span class="spec-value">2,100</span><span class="spec-label">Lot Sq Ft</span></div>
+      </div>
+      <div class="home-price-row">
+        <div class="home-listed">Listed at <strong>$1,149,000</strong></div>
+        <div class="home-sold-badge">Recently Sold</div>
+      </div>
+      <p class="article-body home-desc">A wood-framed Edwardian cottage perched above street level on a double set of painted concrete steps — the kind of entrance that makes visitors feel, before they've even turned the knob, that something charming awaits. And mostly, it does. The living room retains its original picture rail molding and a decorative fireplace with a hand-painted tile surround. The kitchen is small but functional, recently refreshed with subway tile and open shelving. The backyard is compact — about 400 square feet of poured concrete and one determined Meyer lemon tree — but it has the southern exposure that makes Bernal feel, on a fog-free afternoon, like an entirely different city.</p>
+      <div class="home-pros-cons">
+        <div class="pros-cons-grid">
+          <div>
+            <div class="pros-label">Pros</div>
+            <ul class="pros-cons-list pros-list">
+              <li>Period details throughout</li>
+              <li>Sunny south-facing yard</li>
+              <li>Quiet mid-block location</li>
+              <li>Walking distance to Cortland Ave</li>
+            </ul>
+          </div>
+          <div>
+            <div class="cons-label">Cons</div>
+            <ul class="pros-cons-list cons-list">
+              <li>Only one full bathroom</li>
+              <li>Kitchen is very small</li>
+              <li>No dedicated parking</li>
+              <li>840 sq ft is tight for two</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="article-body home-desc">"I walked in and I said 'this is the one' before I even saw the backyard," Maya said. "Daniel said, 'You say that every time.' I said, 'This time I mean it.'" She had also said it at the last four houses. But something about the afternoon light pooling on the original Douglas fir floors gave this one a different quality of conviction.</p>
+    </div>
+  </div>
+
+  <!-- HOME 2 -->
+  <div class="home-card" id="home2">
+    <div class="home-card-header">
+      <span class="home-number">Home 2</span>
+      <span>1497 Shotwell Street</span>
+    </div>
+    <svg class="home-illustration" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sky -->
+      <rect width="680" height="260" fill="#eff4f0"/>
+      <!-- Left neighbor -->
+      <rect x="0" y="75" width="150" height="185" fill="#c8baa4"/>
+      <polygon points="0,75 150,75 75,20" fill="#906848"/>
+      <rect x="25" y="120" width="35" height="32" fill="#9ab8c8"/>
+      <rect x="88" y="120" width="35" height="32" fill="#9ab8c8"/>
+      <rect x="52" y="168" width="28" height="72" fill="#70503a"/>
+      <!-- Main: larger craftsman -->
+      <rect x="162" y="50" width="260" height="210" fill="#e0d5c4"/>
+      <!-- Craftsman porch -->
+      <rect x="162" y="175" width="260" height="85" fill="#d0c5b0"/>
+      <rect x="162" y="172" width="260" height="6" fill="#a89070"/>
+      <!-- Porch columns -->
+      <rect x="182" y="178" width="12" height="77" fill="#c4b498" rx="1"/>
+      <rect x="248" y="178" width="12" height="77" fill="#c4b498" rx="1"/>
+      <rect x="314" y="178" width="12" height="77" fill="#c4b498" rx="1"/>
+      <rect x="392" y="178" width="10" height="77" fill="#c4b498" rx="1"/>
+      <!-- Gabled roof -->
+      <polygon points="162,50 422,50 292,0" fill="#807060"/>
+      <!-- Decorative shingles -->
+      <rect x="200" y="50" width="185" height="25" fill="#706050"/>
+      <!-- Windows upper floor -->
+      <rect x="200" y="75" width="45" height="55" fill="#b0ccdc"/>
+      <rect x="222" y="75" width="2" height="55" fill="#907860"/>
+      <rect x="200" y="100" width="45" height="2" fill="#907860"/>
+      <rect x="338" y="75" width="45" height="55" fill="#b0ccdc"/>
+      <rect x="360" y="75" width="2" height="55" fill="#907860"/>
+      <rect x="338" y="100" width="45" height="2" fill="#907860"/>
+      <!-- Middle window trio -->
+      <rect x="265" y="78" width="60" height="50" fill="#b0ccdc"/>
+      <rect x="285" y="78" width="2" height="50" fill="#907860"/>
+      <rect x="305" y="78" width="2" height="50" fill="#907860"/>
+      <!-- Door -->
+      <rect x="264" y="195" width="56" height="65" fill="#5c3a22" rx="3"/>
+      <rect x="270" y="202" width="18" height="24" fill="#8ab0c4"/>
+      <rect x="292" y="202" width="18" height="24" fill="#8ab0c4"/>
+      <rect x="270" y="230" width="18" height="22" fill="#8ab0c4"/>
+      <rect x="292" y="230" width="18" height="22" fill="#8ab0c4"/>
+      <circle cx="317" cy="226" r="3" fill="#c8a44a"/>
+      <!-- Porch rail -->
+      <rect x="162" y="240" width="260" height="3" fill="#a89070"/>
+      <!-- Steps -->
+      <rect x="249" y="255" width="86" height="5" fill="#c0b090"/>
+      <!-- Right neighbor -->
+      <rect x="435" y="90" width="120" height="170" fill="#c0b49c" opacity="0.85"/>
+      <polygon points="435,90 555,90 495,42" fill="#8c6e50"/>
+      <rect x="452" y="130" width="28" height="28" fill="#9ab8c8"/>
+      <rect x="498" y="130" width="28" height="28" fill="#9ab8c8"/>
+      <!-- Far right -->
+      <rect x="560" y="110" width="120" height="150" fill="#b0a898" opacity="0.5"/>
+      <!-- Trees -->
+      <circle cx="145" cy="175" r="18" fill="#6e9050"/>
+      <rect x="142" y="185" width="6" height="20" fill="#6b4f3a"/>
+      <!-- Sidewalk -->
+      <rect x="0" y="248" width="680" height="12" fill="#b0a898"/>
+      <rect x="162" y="240" width="260" height="8" fill="#c8bca8"/>
+    </svg>
+    <div class="home-details">
+      <div class="home-address">1497 Shotwell Street</div>
+      <div class="home-neighborhood">Bernal Heights / Mission Edge · San Francisco, CA 94110</div>
+      <div class="home-specs">
+        <div class="home-spec"><span class="spec-value">3</span><span class="spec-label">Beds</span></div>
+        <div class="home-spec"><span class="spec-value">2</span><span class="spec-label">Baths</span></div>
+        <div class="home-spec"><span class="spec-value">1,340</span><span class="spec-label">Sq Ft</span></div>
+        <div class="home-spec"><span class="spec-value">1910</span><span class="spec-label">Built</span></div>
+        <div class="home-spec"><span class="spec-value">2,450</span><span class="spec-label">Lot Sq Ft</span></div>
+      </div>
+      <div class="home-price-row">
+        <div class="home-listed">Listed at <strong>$1,395,000</strong></div>
+        <div class="home-sold-badge">Recently Sold</div>
+      </div>
+      <p class="article-body home-desc">The largest of the three, a late Craftsman with a proper front porch and a layout that allows for something the couple had almost stopped believing was possible in their price range: a dedicated home office. Three bedrooms, two full baths, and a renovated kitchen with an actual island — small, but an island. The basement has been finished into a laundry room and bonus storage space, and the backyard has been thoughtfully terraced into two usable levels. The location sits at the lower edge of Bernal, closer to the Mission flats, which means more foot traffic, better taqueria access, and a slightly longer hike up the hill to their favorite park.</p>
+      <div class="home-pros-cons">
+        <div class="pros-cons-grid">
+          <div>
+            <div class="pros-label">Pros</div>
+            <ul class="pros-cons-list pros-list">
+              <li>Most space by far</li>
+              <li>Two full bathrooms</li>
+              <li>Room for a home office</li>
+              <li>Terraced backyard with room to garden</li>
+            </ul>
+          </div>
+          <div>
+            <div class="cons-label">Cons</div>
+            <ul class="pros-cons-list cons-list">
+              <li>Highest asking price</li>
+              <li>Busier street</li>
+              <li>Farther from Bernal Hill park</li>
+              <li>Some deferred maintenance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="article-body home-desc">Daniel loved it immediately. He stood in the would-be office — a room with good light and a view of the neighbor's fig tree — and said he could already see his standing desk there. Maya appreciated the kitchen but noticed the electrical panel looked original to the Eisenhower era. Their agent Cecelia said, quietly, that the inspector would have "thoughts."</p>
+    </div>
+  </div>
+
+  <!-- HOME 3 -->
+  <div class="home-card" id="home3">
+    <div class="home-card-header">
+      <span class="home-number">Home 3</span>
+      <span>25 Elsie Street</span>
+    </div>
+    <svg class="home-illustration" viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+      <!-- Sky gradient -->
+      <rect width="680" height="260" fill="#f0ece4"/>
+      <!-- Left row -->
+      <rect x="0" y="85" width="138" height="175" fill="#ccc0a8"/>
+      <polygon points="0,85 138,85 69,35" fill="#9a7858"/>
+      <rect x="20" y="128" width="30" height="28" fill="#a8c4d0"/>
+      <rect x="80" y="128" width="30" height="28" fill="#a8c4d0"/>
+      <rect x="46" y="170" width="24" height="70" fill="#78543c"/>
+      <!-- Main house - Victorian rowhouse -->
+      <rect x="150" y="55" width="190" height="205" fill="#e4ddd4"/>
+      <!-- Facade detail band -->
+      <rect x="150" y="55" width="190" height="20" fill="#d0c4b0"/>
+      <!-- Bay window - classic SF -->
+      <polygon points="150,75 340,75 340,160 150,160" fill="#ddd5c8"/>
+      <rect x="160" y="85" width="48" height="65" fill="#b0c8d8"/>
+      <rect x="160" y="85" width="48" height="3" fill="#c0a880"/>
+      <rect x="184" y="85" width="2" height="65" fill="#c0a880"/>
+      <rect x="160" y="115" width="48" height="2" fill="#c0a880"/>
+      <rect x="218" y="85" width="44" height="65" fill="#b0c8d8"/>
+      <rect x="218" y="115" width="44" height="2" fill="#c0a880"/>
+      <rect x="240" y="85" width="2" height="65" fill="#c0a880"/>
+      <rect x="272" y="85" width="52" height="65" fill="#b0c8d8"/>
+      <rect x="298" y="85" width="2" height="65" fill="#c0a880"/>
+      <rect x="272" y="115" width="52" height="2" fill="#c0a880"/>
+      <!-- Gingerbread detail -->
+      <path d="M150,75 Q160,65 170,75 Q180,65 190,75 Q200,65 210,75 Q220,65 230,75 Q240,65 250,75 Q260,65 270,75 Q280,65 290,75 Q300,65 310,75 Q320,65 330,75 Q340,65 340,75" fill="none" stroke="#c0a880" stroke-width="2.5"/>
+      <!-- Door surround -->
+      <rect x="215" y="178" width="50" height="82" fill="#c8b898" rx="0"/>
+      <rect x="220" y="168" width="40" height="12" fill="#d0c0a0" rx="1"/>
+      <!-- Door -->
+      <rect x="222" y="178" width="36" height="72" fill="#5a3820" rx="2"/>
+      <rect x="228" y="185" width="10" height="15" fill="#8ab0c0"/>
+      <rect x="242" y="185" width="10" height="15" fill="#8ab0c0"/>
+      <rect x="228" y="204" width="10" height="12" fill="#8ab0c0"/>
+      <rect x="242" y="204" width="10" height="12" fill="#8ab0c0"/>
+      <circle cx="255" cy="216" r="3" fill="#c8a44a"/>
+      <!-- Arch transom -->
+      <path d="M222,178 Q240,162 258,178" fill="#8ab0c0" stroke="#c0a880" stroke-width="1.5"/>
+      <!-- Steps -->
+      <rect x="200" y="248" width="80" height="5" fill="#c4b498"/>
+      <rect x="207" y="243" width="66" height="5" fill="#ccc0a8"/>
+      <!-- Right neighbor -->
+      <rect x="352" y="72" width="145" height="188" fill="#d0c5b0"/>
+      <rect x="352" y="68" width="145" height="8" fill="#b0a090"/>
+      <rect x="363" y="88" width="44" height="55" fill="#a8c0d0"/>
+      <rect x="385" y="88" width="2" height="55" fill="#b09070"/>
+      <rect x="363" y="114" width="44" height="2" fill="#b09070"/>
+      <rect x="435" y="88" width="44" height="55" fill="#a8c0d0"/>
+      <rect x="457" y="88" width="2" height="55" fill="#b09070"/>
+      <rect x="435" y="114" width="44" height="2" fill="#b09070"/>
+      <rect x="390" y="178" width="60" height="82" fill="#70503a" rx="2"/>
+      <!-- Far right -->
+      <rect x="508" y="90" width="172" height="170" fill="#c4baa8" opacity="0.6"/>
+      <!-- Sidewalk -->
+      <rect x="0" y="248" width="680" height="12" fill="#b4ac9c"/>
+      <!-- Address marker -->
+      <text x="240" y="72" font-family="Georgia, serif" font-size="12" fill="#8a6a4a" text-anchor="middle" font-weight="bold">25</text>
+    </svg>
+    <div class="home-details">
+      <div class="home-address">25 Elsie Street</div>
+      <div class="home-neighborhood">Bernal Heights · San Francisco, CA 94110</div>
+      <div class="home-specs">
+        <div class="home-spec"><span class="spec-value">2</span><span class="spec-label">Beds</span></div>
+        <div class="home-spec"><span class="spec-value">1</span><span class="spec-label">Baths</span></div>
+        <div class="home-spec"><span class="spec-value">960</span><span class="spec-label">Sq Ft</span></div>
+        <div class="home-spec"><span class="spec-value">1905</span><span class="spec-label">Built</span></div>
+        <div class="home-spec"><span class="spec-value">2,300</span><span class="spec-label">Lot Sq Ft</span></div>
+      </div>
+      <div class="home-price-row">
+        <div class="home-listed">Listed at <strong>$1,095,000</strong></div>
+        <div class="home-sold-badge">Recently Sold</div>
+      </div>
+      <p class="article-body home-desc">A Victorian rowhouse that wears its age with a certain dignity — arched transom window above the door, original egg-and-dart molding along the ceiling, wide-plank floors that creak in a way that feels earned. At 960 square feet, it is not large; the second bedroom requires a willingness to be creative, or at least friendly with IKEA's space-saving line. But the lot is deep, and the backyard — an unexpectedly generous 40-by-40-foot rectangle — had been recently cleared by the sellers, an optimistic blank canvas of dirt and possibility. The street itself is a gentle one: mostly owner-occupied homes, a neighbor who leaves Meyer lemons on the stoop in season, and the kind of block that holds a raucous Fourth of July party and cleans up meticulously afterward.</p>
+      <div class="home-pros-cons">
+        <div class="pros-cons-grid">
+          <div>
+            <div class="pros-label">Pros</div>
+            <ul class="pros-cons-list pros-list">
+              <li>Lowest ask of the three</li>
+              <li>Large deep backyard</li>
+              <li>Intact Victorian character</li>
+              <li>Quiet, neighborly block</li>
+            </ul>
+          </div>
+          <div>
+            <div class="cons-label">Cons</div>
+            <ul class="pros-cons-list cons-list">
+              <li>One bath, tight layout</li>
+              <li>Second bedroom is small</li>
+              <li>Kitchen needs a full update</li>
+              <li>No parking at all</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="article-body home-desc">The backyard was what got them. "We stood out there and Maya just went quiet," Daniel said. "That was the moment I knew." Maya stood in the center of the patchy dirt rectangle and pictured a raised vegetable bed, a hammock strung between two posts, a medium-sized dog of as-yet-undetermined breed exploring the perimeter. "I didn't need it to be perfect," she said. "I just needed it to be ours."</p>
+    </div>
+  </div>
+
+  <!-- ─── QUIZ ─── -->
+  <div class="quiz-section">
+    <div class="quiz-eyebrow">Reader Poll</div>
+    <h2 class="quiz-question">Which home did Maya and Daniel choose?</h2>
+    <div class="quiz-options">
+      <button class="quiz-btn" onclick="handleQuiz(1, this)">
+        <span class="btn-num">1</span>
+        116 Elsie St.<br>The Edwardian Cottage
+      </button>
+      <button class="quiz-btn" onclick="handleQuiz(2, this)">
+        <span class="btn-num">2</span>
+        1497 Shotwell St.<br>The Craftsman
+      </button>
+      <button class="quiz-btn" onclick="handleQuiz(3, this)">
+        <span class="btn-num">3</span>
+        25 Elsie St.<br>The Victorian Rowhouse
+      </button>
+    </div>
+    <button class="see-answer-btn" onclick="revealAnswer()">Skip to answer ↓</button>
+    <div class="quiz-result" id="quiz-result"></div>
+  </div>
+
+  <!-- ─── REVEAL ─── -->
+  <div class="reveal-section" id="reveal">
+    <div class="reveal-eyebrow">The Verdict</div>
+    <h2 class="reveal-hed">They Chose Home 3: 25 Elsie Street</h2>
+
+    <div class="article-body">
+      <p>The inspection came back clean enough — a few items, nothing structural, nothing that Cecelia hadn't seen a hundred times before. They offered $1,255,000, which was $160,000 over asking and, at the time, felt like an enormous number. The sellers, a retired couple relocating to be near their grandchildren in Portland, accepted within hours.</p>
+    </div>
+
+    <div class="final-price-box">
+      <div class="final-price-label">Final Sale Price</div>
+      <div class="final-price">$1,255,000</div>
+      <div class="final-price-sub">$160,000 over asking · Closed March 28, 2026</div>
+    </div>
+
+    <div class="article-body">
+      <p>"We probably could have pushed harder on Shotwell," Daniel admitted, "and gotten more space. But space isn't everything. We kept coming back to the feeling of 25 Elsie. It felt like a home that was waiting to be filled up."</p>
+
+      <p>They moved in on a Saturday in early April, carrying boxes up those narrow front steps while their upstairs neighbors — they had upstairs neighbors now, a concept that delighted them — knocked on the door with a bottle of Napa Cab and the information that the block association meets the first Wednesday of every month and they make really excellent tamales.</p>
+
+      <p>The kitchen renovation is budgeted for year two. The dog — a rescue greyhound they have already named Mango — arrives in July. The backyard remains, for now, a rectangle of dirt and promise.</p>
+
+      <p>"We kept telling ourselves: it's just a house," Maya said, sitting on the back steps in the afternoon sun, a mug of tea balanced on her knee. "And then we moved in, and it just — stopped being a house."</p>
+
+      <p>She paused and watched a hummingbird investigate the neighbor's bougainvillea over the fence.</p>
+
+      <p>"It's ours," she said.</p>
+    </div>
+  </div>
+
+  <hr class="section-rule">
+  <p style="font-family: var(--nbt-sans); font-size: 12px; color: var(--nbt-gray); line-height: 1.6;">
+    <em>The New Bernal Times' "The Forager" follows Bay Area residents through their home search. Sale prices reflect public records. Names have been changed at the subjects' request. The New Bernal Times is a satirical publication produced by a local housing advocacy organization. Any resemblance to actual journalism is purely aspirational.</em>
+  </p>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <span class="footer-logo">The New Bernal Times</span>
+  <div style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;">All the Homes Fit to Print</div>
+  <p>Real Estate · Neighborhood · The Forager · Opinion · Open Houses</p>
+  <p style="margin-top:10px; font-size:10px;">© 2026 The New Bernal Times. A satirical publication. Not affiliated with any actual newspaper of record, however much we admire their kerning.</p>
+</footer>
+
+<script>
+  const CORRECT = 3;
+  let answered = false;
+
+  function handleQuiz(choice, btn) {
+    if (answered) return;
+    answered = true;
+
+    document.querySelectorAll('.quiz-btn').forEach((b, i) => {
+      const num = i + 1;
+      if (num === CORRECT) b.classList.add('correct');
+      else if (b === btn && num !== CORRECT) b.classList.add('wrong');
+      else b.style.opacity = '0.4';
+    });
+
+    const result = document.getElementById('quiz-result');
+    result.classList.add('visible');
+
+    if (choice === CORRECT) {
+      result.innerHTML = `<strong>You got it right!</strong> Maya and Daniel chose <strong>25 Elsie Street</strong> — the Victorian rowhouse with the big backyard and the neighborly block. They paid $1,255,000, or $160,000 over the $1,095,000 asking price. Scroll down to read the full story of how they got there.`;
+    } else {
+      const names = ['', '116 Elsie Street, the Edwardian cottage', '1497 Shotwell Street, the Craftsman', '25 Elsie Street, the Victorian rowhouse'];
+      result.innerHTML = `<strong>Not quite.</strong> You chose ${names[choice]}, but Maya and Daniel went with <strong>25 Elsie Street</strong> — the Victorian rowhouse with the large backyard that won Maya over the moment she stood in it. They paid $1,255,000. Scroll down for the full reveal.`;
+    }
+  }
+
+  function revealAnswer() {
+    if (!answered) {
+      answered = true;
+      document.querySelectorAll('.quiz-btn').forEach((b, i) => {
+        if (i + 1 === CORRECT) b.classList.add('correct');
+        else b.style.opacity = '0.4';
+      });
+      const result = document.getElementById('quiz-result');
+      result.classList.add('visible');
+      result.innerHTML = `They chose <strong>25 Elsie Street</strong> — the Victorian rowhouse at $1,255,000, or $160,000 over asking. Scroll down for the full story.`;
+    }
+    document.getElementById('reveal').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+</script>
+</body>
+</html>
