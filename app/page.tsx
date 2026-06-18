@@ -1,39 +1,62 @@
-"use client";
+import type { Metadata } from "next";
 
-import { useEffect, useState } from "react";
+export const metadata: Metadata = {
+  title: "The New Bernal Times — The Forager",
+};
 
-interface Listing {
-  id: string;
-  address: string;
-  price: string;
-  beds: string;
-  baths: string;
-  sqft: string;
-  description: string;
-  imgUrl: string;
-  zillowUrl: string;
-  status: string;
-  yearBuilt: string;
-  lotSize: string;
-}
-
-const HEADLINES: Record<string, { headline: string; subhead: string; byline: string }> = {
-  "116-elsie": {
+const LISTINGS = [
+  {
+    id: "116-elsie",
+    address: "116 Elsie St, San Francisco, CA 94110",
+    price: "$4,884,600",
+    beds: "4 bd",
+    baths: "6 ba",
+    sqft: "2,834 sqft",
+    yearBuilt: "2018",
+    imgUrl:
+      "https://photos.zillowstatic.com/fp/326a23a90ee43a72cae3ec75acef0b52-cc_ft_1536.jpg",
+    zillowUrl:
+      "https://www.zillow.com/homedetails/116-Elsie-St-San-Francisco-CA-94110/125164135_zpid/",
     headline: "Victorians at the Gate: 116 Elsie St. Beckons With Unmatched Charm",
     subhead: "In a neighborhood where fog meets ambition, a storied home finds its moment",
     byline: "By CORNELIUS P. HARRINGTON III",
+    body: "Built in 2018 and stretching across 2,834 square feet, this six-bathroom marvel on Elsie Street represents something rare in Bernal Heights: ambition made manifest in drywall and reclaimed wood. Four bedrooms await the discerning buyer, each one whispering of dinner parties not yet thrown, of children not yet born, of a Peloton that will absolutely be used this time.",
   },
-  "1497-shotwell": {
+  {
+    id: "1497-shotwell",
+    address: "1497 Shotwell St, San Francisco, CA 94110",
+    price: "$4,661,500",
+    beds: "4 bd",
+    baths: "4 ba",
+    sqft: "2,545 sqft",
+    yearBuilt: "1910",
+    imgUrl:
+      "https://photos.zillowstatic.com/fp/5d5bb1ad15fa89fb7f84c0383d60dbbb-cc_ft_1536.jpg",
+    zillowUrl:
+      "https://www.zillow.com/homedetails/1497-Shotwell-St-San-Francisco-CA-94110/15160090_zpid/",
     headline: "Shotwell Stunner Listed; Neighbors Reportedly 'Cautiously Optimistic'",
-    subhead: "Inspectors confirm: walls are still attached to house",
+    subhead: "A 1910 classic enters the market with all four walls intact",
     byline: "By DOROTHEA WAINSCOTT-SMYTHE",
+    body: "Originally constructed in 1910, this Shotwell Street property has survived two world wars, the Summer of Love, and the dot-com bust — and it shows, in the best possible way. Four bedrooms, four bathrooms, and 2,545 square feet of what agents are calling 'historic character' and what buyers will call 'their problem now.'",
   },
-  "25-elsie": {
+  {
+    id: "25-elsie",
+    address: "25 Elsie St, San Francisco, CA 94110",
+    price: "$4,000,000",
+    beds: "3 bd",
+    baths: "3 ba",
+    sqft: "2,361 sqft",
+    yearBuilt: "1988",
+    imgUrl:
+      "https://photos.zillowstatic.com/fp/58df6dc5851225d1847c8b746292dcb3-cc_ft_1536.jpg",
+    zillowUrl:
+      "https://www.zillow.com/homedetails/25-Elsie-St-San-Francisco-CA-94110/15161163_zpid/",
     headline: "25 Elsie Enters Market; Block Braces for Wave of Open-House Visitors",
-    subhead: "Property features door, roof, and assorted rooms — insiders say more detail forthcoming",
+    subhead: "Three bedrooms, three baths, and a price tag that requires sitting down first",
     byline: "By PERCIVAL DUNDAS-HEWLITT",
+    body: "Listed at an even $4,000,000 — a number that real estate professionals describe as 'a conversation starter' — this 1988-built residence on Elsie Street offers 2,361 square feet of living space and the ineffable satisfaction of being able to say you live on Elsie Street. Three bedrooms, three bathrooms, and presumably a drawer full of takeout menus.",
   },
-};
+];
 
 function formatDate() {
   return new Date().toLocaleDateString("en-US", {
@@ -44,118 +67,9 @@ function formatDate() {
   });
 }
 
-function ListingCard({ listing, index }: { listing: Listing; index: number }) {
-  const meta = HEADLINES[listing.id] ?? {
-    headline: listing.address,
-    subhead: "",
-    byline: "By STAFF CORRESPONDENT",
-  };
-
-  const isLead = index === 0;
-
-  return (
-    <article className={`${index > 0 ? "border-l border-[#e2e2e2] pl-5" : ""}`}>
-      {listing.imgUrl ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={listing.imgUrl}
-          alt={listing.address}
-          className={`w-full object-cover mb-3 ${isLead ? "h-56" : "h-40"}`}
-        />
-      ) : (
-        <div
-          className={`w-full bg-[#f0ede8] flex items-center justify-center mb-3 text-[#999] text-sm italic ${isLead ? "h-56" : "h-40"}`}
-        >
-          Photograph Unavailable
-        </div>
-      )}
-
-      {listing.status && (
-        <span className="text-[10px] uppercase tracking-widest text-[#666] font-sans font-semibold">
-          {listing.status}
-        </span>
-      )}
-
-      <h2
-        className={`font-playfair font-bold leading-tight mt-1 mb-1 ${
-          isLead ? "text-3xl" : "text-xl"
-        }`}
-      >
-        {meta.headline}
-      </h2>
-
-      {isLead && meta.subhead && (
-        <p className="font-fell italic text-lg text-[#444] mb-2 leading-snug">
-          {meta.subhead}
-        </p>
-      )}
-
-      <p className="text-[11px] text-[#666] uppercase tracking-widest font-sans mb-2">
-        {meta.byline}
-      </p>
-
-      <div className="flex flex-wrap gap-2 text-xs text-[#555] mb-2 font-sans">
-        {listing.price && (
-          <span className="font-bold text-sm text-[#121212]">{listing.price}</span>
-        )}
-        {listing.beds && <span>{listing.beds}</span>}
-        {listing.baths && <span>{listing.baths}</span>}
-        {listing.sqft && <span>{listing.sqft}</span>}
-        {listing.yearBuilt && <span>Built {listing.yearBuilt}</span>}
-        {listing.lotSize && <span>Lot: {listing.lotSize}</span>}
-      </div>
-
-      {listing.description && (
-        <p className="text-[14px] leading-relaxed text-[#333] mb-3 line-clamp-4">
-          {listing.description}
-        </p>
-      )}
-
-      <a
-        href={listing.zillowUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-[11px] uppercase tracking-widest font-sans text-[#326891] hover:underline"
-      >
-        Full Listing on Zillow →
-      </a>
-    </article>
-  );
-}
-
-function ErrorNote({ errors }: { errors: string[] }) {
-  if (!errors.length) return null;
-  return (
-    <div className="bg-[#fff8e1] border border-[#f0c040] p-3 my-4 text-sm font-sans">
-      <strong>Scraping notes:</strong>
-      <ul className="list-disc list-inside mt-1 text-[#555]">
-        {errors.map((e, i) => (
-          <li key={i}>{e}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+const [lead, ...rest] = LISTINGS;
 
 export default function Home() {
-  const [listings, setListings] = useState<Listing[]>([]);
-  const [errors, setErrors] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [fetchError, setFetchError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("/api/listings")
-      .then((r) => r.json())
-      .then((data) => {
-        setListings(data.listings ?? []);
-        setErrors(data.errors ?? []);
-      })
-      .catch((e: Error) => setFetchError(e.message))
-      .finally(() => setLoading(false));
-  }, []);
-
-  const [lead, ...rest] = listings;
-
   return (
     <div className="max-w-5xl mx-auto px-4">
       {/* Masthead */}
@@ -182,44 +96,86 @@ export default function Home() {
         <div className="flex-1 border-t border-[#121212]" />
       </div>
 
-      {loading && (
-        <div className="text-center py-20 font-fell italic text-xl text-[#888]">
-          Dispatching our correspondents to Zillow&hellip;
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        {/* Lead story */}
+        <div className="md:col-span-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={lead.imgUrl}
+            alt={lead.address}
+            className="w-full object-cover h-64 mb-3"
+          />
+          <span className="text-[10px] uppercase tracking-widest text-[#666] font-sans font-semibold">
+            For Sale
+          </span>
+          <h2 className="font-playfair font-bold text-3xl leading-tight mt-1 mb-1">
+            {lead.headline}
+          </h2>
+          <p className="font-fell italic text-lg text-[#444] mb-2 leading-snug">
+            {lead.subhead}
+          </p>
+          <p className="text-[11px] text-[#666] uppercase tracking-widest font-sans mb-2">
+            {lead.byline}
+          </p>
+          <div className="flex gap-3 text-xs text-[#555] font-sans mb-3">
+            <span className="font-bold text-sm text-[#121212]">{lead.price}</span>
+            <span>{lead.beds}</span>
+            <span>{lead.baths}</span>
+            <span>{lead.sqft}</span>
+            <span>Built {lead.yearBuilt}</span>
+          </div>
+          <p className="text-[15px] leading-relaxed text-[#333] mb-3">{lead.body}</p>
+          <a
+            href={lead.zillowUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[11px] uppercase tracking-widest font-sans text-[#326891] hover:underline"
+          >
+            Full Listing on Zillow →
+          </a>
         </div>
-      )}
 
-      {fetchError && (
-        <div className="text-center py-10 text-red-700 font-sans text-sm">
-          Error: {fetchError}
-        </div>
-      )}
-
-      {!loading && !fetchError && (
-        <>
-          <ErrorNote errors={errors} />
-
-          {listings.length === 0 ? (
-            <div className="text-center py-20 font-fell italic text-xl text-[#888]">
-              No listings returned — check your <code>SCRAPINGBEE_API_KEY</code>.
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-              {lead && (
-                <div className="md:col-span-2">
-                  <ListingCard listing={lead} index={0} />
-                </div>
-              )}
-              <div className="flex flex-col gap-6">
-                {rest.map((l, i) => (
-                  <ListingCard key={l.id} listing={l} index={i + 1} />
-                ))}
+        {/* Right column */}
+        <div className="flex flex-col gap-6">
+          {rest.map((listing) => (
+            <article key={listing.id} className="border-l border-[#e2e2e2] pl-5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={listing.imgUrl}
+                alt={listing.address}
+                className="w-full object-cover h-40 mb-3"
+              />
+              <span className="text-[10px] uppercase tracking-widest text-[#666] font-sans font-semibold">
+                For Sale
+              </span>
+              <h2 className="font-playfair font-bold text-xl leading-tight mt-1 mb-1">
+                {listing.headline}
+              </h2>
+              <p className="text-[11px] text-[#666] uppercase tracking-widest font-sans mb-2">
+                {listing.byline}
+              </p>
+              <div className="flex flex-wrap gap-2 text-xs text-[#555] font-sans mb-2">
+                <span className="font-bold text-sm text-[#121212]">{listing.price}</span>
+                <span>{listing.beds}</span>
+                <span>{listing.baths}</span>
+                <span>{listing.sqft}</span>
               </div>
-            </div>
-          )}
-        </>
-      )}
+              <p className="text-[13px] leading-relaxed text-[#333] mb-3 line-clamp-4">
+                {listing.body}
+              </p>
+              <a
+                href={listing.zillowUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] uppercase tracking-widest font-sans text-[#326891] hover:underline"
+              >
+                Full Listing on Zillow →
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
 
-      {/* Footer */}
       <footer className="border-t-2 border-[#121212] py-4 text-center text-[10px] text-[#888] uppercase tracking-widest font-sans">
         © {new Date().getFullYear()} The New Bernal Times &nbsp;·&nbsp; Not affiliated with The New York Times &nbsp;·&nbsp; Parody
       </footer>
