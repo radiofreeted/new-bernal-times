@@ -1,66 +1,142 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "The Forager | The New Bernal Times",
-  description: "They grew up on these streets. Now they can't afford to stay.",
-};
+import { useState } from "react";
 
 const LISTINGS = [
   {
     id: "116-elsie",
     address: "116 Elsie St.",
+    neighborhood: "Bernal Heights, San Francisco",
     listed: "$3,995,000",
     sold: "$4,700,000",
     overAsking: "$705,000 over asking",
-    beds: "4 bd",
-    baths: "6 ba",
-    sqft: "2,834 sq ft",
-    yearBuilt: "2018",
+    beds: 4,
+    baths: 6,
+    sqft: "2,834",
+    yearBuilt: 2018,
     imgUrl:
       "https://photos.zillowstatic.com/fp/326a23a90ee43a72cae3ec75acef0b52-cc_ft_1536.jpg",
     zillowUrl:
       "https://www.zillow.com/homedetails/116-Elsie-St-San-Francisco-CA-94110/125164135_zpid/",
-    caption: "116 Elsie St., built 2018. Six bathrooms.",
-    buyerThought: "\"We could actually see ourselves here,\" said Marcus.",
-    sellerResult: "It sold in five days for $4,700,000 — $705,000 over asking — to an all-cash buyer who waived inspection.",
+    description:
+      "A four-bedroom, six-bathroom home built in 2018 with a waterfall kitchen island and views of the hill. Clean lines. Good light. An espresso machine built into the cabinetry.",
+    reaction:
+      "Marcus and Julia offered $4,200,000. It felt, Marcus said, \"insane to type.\" An all-cash buyer with a clean offer letter beat them by half a million dollars. The house was on the market for five days.",
   },
   {
     id: "25-elsie",
     address: "25 Elsie St.",
+    neighborhood: "Bernal Heights, San Francisco",
     listed: "$2,995,000",
     sold: "$4,000,000",
     overAsking: "$1,005,000 over asking",
-    beds: "3 bd",
-    baths: "3 ba",
-    sqft: "2,361 sq ft",
-    yearBuilt: "1988",
+    beds: 3,
+    baths: 3,
+    sqft: "2,361",
+    yearBuilt: 1988,
     imgUrl:
       "https://photos.zillowstatic.com/fp/58df6dc5851225d1847c8b746292dcb3-cc_ft_1536.jpg",
     zillowUrl:
       "https://www.zillow.com/homedetails/25-Elsie-St-San-Francisco-CA-94110/15161163_zpid/",
-    caption: "25 Elsie St., three bedrooms. Listed under $3 million.",
-    buyerThought: "\"It's listed under three million,\" Julia said. \"That's almost reasonable.\"",
-    sellerResult: "It sold for $4,000,000. The winning offer was $1,005,000 over asking. There were eleven bids.",
+    description:
+      "A three-bedroom, three-bathroom home from 1988. The master bathroom hadn't been updated since the Clinton administration. The backyard was a project. The list price started with a two.",
+    reaction:
+      "\"It's listed under three million,\" Julia said on the drive over. \"That's almost reasonable.\" There were eleven bids. They were not the highest. The house sold for $4,000,000 — a million and five thousand dollars over asking.",
   },
   {
     id: "1497-shotwell",
     address: "1497 Shotwell St.",
+    neighborhood: "Bernal Heights, San Francisco",
     listed: "$3,499,000",
     sold: "$4,650,000",
     overAsking: "$1,151,000 over asking",
-    beds: "4 bd",
-    baths: "4 ba",
-    sqft: "2,545 sq ft",
-    yearBuilt: "1910",
+    beds: 4,
+    baths: 4,
+    sqft: "2,545",
+    yearBuilt: 1910,
     imgUrl:
       "https://photos.zillowstatic.com/fp/5d5bb1ad15fa89fb7f84c0383d60dbbb-cc_ft_1536.jpg",
     zillowUrl:
       "https://www.zillow.com/homedetails/1497-Shotwell-St-San-Francisco-CA-94110/15160090_zpid/",
-    caption: "1497 Shotwell St., built 1910. Original details.",
-    buyerThought: "\"My grandmother used to walk past this house,\" Julia said.",
-    sellerResult: "It sold for $4,650,000 — $1,151,000 over asking. Marcus and Julia had offered $3,800,000.",
+    description:
+      "A four-bedroom, four-bathroom Victorian built in 1910, with original built-ins and a claw-foot tub. Julia's grandmother walked past this house every Sunday on her way to St. Anthony's. \"This is the one,\" Julia said.",
+    reaction:
+      "They offered $3,800,000 and wrote a letter — about Bernal Heights, about their parents, about wanting to stay. The house sold for $4,650,000. The winning buyer had also grown up in the neighborhood. This did not help.",
   },
 ];
+
+function QuizCard({ listing, index }: { listing: typeof LISTINGS[0]; index: number }) {
+  const [revealed, setRevealed] = useState(false);
+
+  return (
+    <div className="my-10 border-t border-[#e2e2e2] pt-8">
+      <p className="text-[11px] uppercase tracking-widest font-sans text-[#666] mb-3">
+        Home {index + 1} of 3
+      </p>
+
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={listing.imgUrl}
+        alt={listing.address}
+        className="w-full object-cover h-72 md:h-96"
+      />
+      <p className="text-[11px] text-[#888] font-sans italic mt-1 mb-5">
+        {listing.address}, {listing.neighborhood}. <a href={listing.zillowUrl} target="_blank" rel="noopener noreferrer" className="underline">View on Zillow.</a>
+      </p>
+
+      {/* Specs */}
+      <div className="flex flex-wrap gap-x-6 gap-y-1 text-[13px] font-sans text-[#444] mb-4 border-l-2 border-[#121212] pl-4">
+        <span>{listing.beds} bedrooms</span>
+        <span>{listing.baths} bathrooms</span>
+        <span>{listing.sqft} sq ft</span>
+        <span>Built {listing.yearBuilt}</span>
+      </div>
+
+      <p className="text-[16px] leading-relaxed text-[#333] mb-6">{listing.description}</p>
+
+      {/* Quiz */}
+      <div className="bg-[#f7f4ef] border border-[#e2e2e2] p-5">
+        <div className="flex justify-between items-baseline mb-4">
+          <div>
+            <p className="text-[11px] uppercase tracking-widest font-sans text-[#666]">Listed at</p>
+            <p className="font-playfair font-bold text-2xl">{listing.listed}</p>
+          </div>
+          <div className="text-right">
+            <p className="text-[11px] uppercase tracking-widest font-sans text-[#666]">Sold for</p>
+            {revealed ? (
+              <div>
+                <p className="font-playfair font-bold text-2xl text-red-700">{listing.sold}</p>
+                <p className="text-[11px] font-sans text-red-700 font-semibold mt-0.5">↑ {listing.overAsking}</p>
+              </div>
+            ) : (
+              <button
+                onClick={() => setRevealed(true)}
+                className="font-playfair font-bold text-lg text-[#326891] underline cursor-pointer hover:text-[#121212] transition-colors"
+              >
+                What do you think?
+              </button>
+            )}
+          </div>
+        </div>
+
+        {revealed && (
+          <p className="text-[14px] leading-relaxed text-[#444] border-t border-[#e2e2e2] pt-4 mt-2">
+            {listing.reaction}
+          </p>
+        )}
+
+        {!revealed && (
+          <button
+            onClick={() => setRevealed(true)}
+            className="w-full bg-[#121212] text-white text-[12px] uppercase tracking-widest font-sans py-3 hover:bg-[#333] transition-colors cursor-pointer"
+          >
+            Reveal sale price
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
 
 function formatDate() {
   return new Date().toLocaleDateString("en-US", {
@@ -69,58 +145,6 @@ function formatDate() {
     month: "long",
     day: "numeric",
   });
-}
-
-function ListingCallout({
-  listing,
-  index,
-}: {
-  listing: (typeof LISTINGS)[0];
-  index: number;
-}) {
-  return (
-    <div className={`my-8 ${index % 2 === 0 ? "md:float-right md:ml-8 md:w-80" : "md:float-left md:mr-8 md:w-80"} w-full`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={listing.imgUrl}
-        alt={listing.address}
-        className="w-full object-cover h-48"
-      />
-      <p className="text-[11px] text-[#666] font-sans italic mt-1 mb-2">
-        {listing.caption}
-      </p>
-      <div className="border-t border-b border-[#121212] py-3 my-2">
-        <p className="font-playfair font-bold text-lg">{listing.address}</p>
-        <div className="flex justify-between items-baseline mt-1">
-          <div>
-            <p className="text-[10px] uppercase tracking-widest text-[#666] font-sans">Listed</p>
-            <p className="font-playfair text-xl font-bold">{listing.listed}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-[10px] uppercase tracking-widest text-[#666] font-sans">Sold</p>
-            <p className="font-playfair text-xl font-bold text-red-700">{listing.sold}</p>
-          </div>
-        </div>
-        <p className="text-[11px] text-red-700 font-sans font-semibold mt-1">
-          ↑ {listing.overAsking}
-        </p>
-        <div className="flex gap-3 text-[11px] text-[#555] font-sans mt-2">
-          <span>{listing.beds}</span>
-          <span>{listing.baths}</span>
-          <span>{listing.sqft}</span>
-          <span>Built {listing.yearBuilt}</span>
-        </div>
-      </div>
-      <a
-        href={listing.zillowUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-[10px] uppercase tracking-widest font-sans text-[#326891] hover:underline"
-      >
-        Zillow listing →
-      </a>
-    </div>
-  );
 }
 
 export default function Home() {
@@ -163,96 +187,38 @@ export default function Home() {
             By DOROTHEA WAINSCOTT-SMYTHE
           </p>
           <p className="text-[11px] text-[#666] font-sans">
-            Published {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+            {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
           </p>
         </div>
 
-        <div className="prose-article text-[16px] leading-relaxed text-[#333] space-y-5 clearfix">
-
+        <div className="text-[16px] leading-relaxed text-[#333] space-y-5">
           <p>
-            Marcus and Julia Reyes have spent their whole lives on the eastern slope of Bernal Heights. Marcus grew up on Precita Avenue. Julia on Eugenia. They met at Mission High, left for college, came back — as people from Bernal tend to do — and have been renting a two-bedroom on Andover Street for the past six years, two blocks from Marcus&apos;s parents and four blocks from Julia&apos;s.
+            Marcus and Julia Reyes have spent their whole lives on the eastern slope of Bernal Heights. Marcus grew up on Precita Avenue. Julia on Eugenia. They met at Mission High, left for college, came back — as people from Bernal tend to do — and have been renting a two-bedroom on Andover Street for six years, two blocks from Marcus&apos;s parents and four blocks from Julia&apos;s.
           </p>
-
           <p>
-            Last spring, with their daughter Cora turning two and a second baby on the way, they decided it was time to buy.
+            Last spring, with their daughter Cora turning two and a second baby on the way, they decided it was time to buy. They had $800,000 saved. They were pre-approved for a jumbo loan. Their agent, Sandra, a patient woman who has been selling homes in Bernal Heights for nineteen years, told them the market was &ldquo;active.&rdquo;
           </p>
-
           <p>
-            &ldquo;We always assumed we&apos;d end up here,&rdquo; Julia said. &ldquo;Our parents are here. Cora&apos;s godparents are here. We just figured — we&apos;re from here, we know how it works, we&apos;ll figure it out.&rdquo;
+            Below are the three homes they considered. For each one, we&apos;ve listed the asking price. See if you can guess what it actually sold for.
           </p>
+        </div>
 
-          <p>They had $800,000 in savings. They were pre-approved for a jumbo loan. Their realtor, a patient woman named Sandra who has been selling homes in Bernal Heights for nineteen years, told them the market was &ldquo;active.&rdquo;</p>
+        {LISTINGS.map((listing, i) => (
+          <QuizCard key={listing.id} listing={listing} index={i} />
+        ))}
 
-          <p>&ldquo;Active,&rdquo; Marcus repeated, when asked what she&apos;d said. &ldquo;Yeah. She said active.&rdquo;</p>
-
-          <ListingCallout listing={LISTINGS[0]} index={0} />
-
+        <div className="text-[16px] leading-relaxed text-[#333] space-y-5 mt-4">
           <p>
-            The first house they toured was on Elsie Street — a four-bedroom built in 2018, with six bathrooms and clean modern lines that felt, as Julia put it, &ldquo;almost aggressively new.&rdquo; It was listed at $3,995,000. Sandra had warned them that the list price was a formality.
+            Marcus and Julia are still on Andover Street. The baby arrived in October — a boy, they named him Leo — and they have converted the dining room into a nursery. Sandra sends them listings when something comes up. The market, she says, remains active.
           </p>
-
           <p>
-            &ldquo;We could actually see ourselves here,&rdquo; Marcus said, standing in the kitchen, which had a waterfall island and a Miele espresso machine built into the cabinetry. He opened a cabinet. He closed it. &ldquo;Like, genuinely. This is a real house.&rdquo;
+            &ldquo;We thought being from here would count for something,&rdquo; Julia said. Outside, a dog barked on the street below — the specific bark of a Bernal Heights dog, lazy and unhurried, the bark of a dog that lives somewhere.
           </p>
-
-          <p>
-            They offered $4,200,000. It felt, Marcus said, &ldquo;insane to type.&rdquo; It was not enough. The house sold in five days for $4,700,000 — $705,000 over asking — to an all-cash buyer who waived inspection and had, according to Sandra, &ldquo;a very clean offer letter.&rdquo;
-          </p>
-
-          <p>
-            &ldquo;Who has four point seven million in cash?&rdquo; Julia asked. She was not really asking.
-          </p>
-
-          <ListingCallout listing={LISTINGS[1]} index={1} />
-
-          <p>
-            The second house was also on Elsie Street — a three-bedroom from 1988, a little more worn, listed at $2,995,000. Julia noticed that the list price started with a two. This seemed meaningful.
-          </p>
-
-          <p>
-            &ldquo;It&apos;s listed under three million,&rdquo; she said to Marcus, in the car on the way there. &ldquo;That&apos;s almost reasonable.&rdquo;
-          </p>
-
-          <p>
-            The house needed work. The master bathroom had not been updated since the Clinton administration. The backyard was a project. Cora, upon being set down in the living room, immediately found a dead moth and tried to eat it. Marcus and Julia looked at each other over their daughter&apos;s head with an expression that longtime homebuyers will recognize as cautious hope.
-          </p>
-
-          <p>
-            They offered $3,500,000. There were eleven other bids. The house sold for $4,000,000 — $1,005,000 over asking. Sandra delivered the news by text. &ldquo;So sorry,&rdquo; she wrote. &ldquo;Market is very active right now.&rdquo;
-          </p>
-
-          <ListingCallout listing={LISTINGS[2]} index={2} />
-
-          <p>
-            The third house was on Shotwell Street, a 1910 Victorian with original built-ins and a claw-foot tub that Julia photographed and texted to her mother. It was listed at $3,499,000. Julia&apos;s grandmother had walked past this house every Sunday on her way to St. Anthony&apos;s.
-          </p>
-
-          <p>
-            &ldquo;This is the one,&rdquo; Julia said. She meant it.
-          </p>
-
-          <p>
-            They offered $3,800,000. They wrote a letter — the kind that real estate agents say doesn&apos;t matter anymore — about Bernal Heights, about their parents, about Cora, about wanting to stay. Sandra submitted it with the offer. The letter, presumably, was read by no one.
-          </p>
-
-          <p>
-            The house sold for $4,650,000. That is $1,151,000 over asking. The winning buyer, Sandra told them, had also grown up in the neighborhood. This did not help.
-          </p>
-
-          <p>
-            Marcus and Julia are still on Andover Street. The baby arrived in October — a boy, they named him Leo — and they have converted the dining room into a nursery. They are still looking, Sandra tells them. The market, she says, remains active.
-          </p>
-
-          <p>
-            &ldquo;We thought being from here would count for something,&rdquo; Julia said. She paused. Outside, a dog barked on the street below, the specific bark of a Bernal Heights dog, lazy and unhurried, the bark of a dog that lives somewhere.
-          </p>
-
           <p>&ldquo;It didn&apos;t.&rdquo;</p>
-
         </div>
 
         <div className="border-t border-[#e2e2e2] mt-10 pt-4 text-[11px] text-[#888] font-sans">
-          <p><em>This is a work of parody. The Reyes family is fictional. The listing prices and sale prices are real.</em></p>
+          <p><em>This is a work of parody. The Reyes family is fictional. The listing and sale prices are real.</em></p>
         </div>
       </article>
 
