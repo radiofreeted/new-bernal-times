@@ -4,9 +4,9 @@ import { useState } from "react";
 
 const LISTINGS = [
   {
-    id: "116-elsie",
+    num: 1,
+    title: "New Construction on Elsie, Six Bathrooms",
     address: "116 Elsie St.",
-    neighborhood: "Bernal Heights, San Francisco",
     listed: "$3,995,000",
     sold: "$4,700,000",
     overAsking: "$705,000 over asking",
@@ -14,19 +14,20 @@ const LISTINGS = [
     baths: 6,
     sqft: "2,834",
     yearBuilt: 2018,
+    taxes: "$14,200 a year",
     imgUrl:
       "https://photos.zillowstatic.com/fp/326a23a90ee43a72cae3ec75acef0b52-cc_ft_1536.jpg",
     zillowUrl:
       "https://www.zillow.com/homedetails/116-Elsie-St-San-Francisco-CA-94110/125164135_zpid/",
-    description:
-      "A four-bedroom, six-bathroom home built in 2018 with a waterfall kitchen island and views of the hill. Clean lines. Good light. An espresso machine built into the cabinetry.",
-    reaction:
-      "Marcus and Julia offered $4,200,000. It felt, Marcus said, \"insane to type.\" An all-cash buyer with a clean offer letter beat them by half a million dollars. The house was on the market for five days.",
+    description: `This four-bedroom, six-bathroom home, built in 2018, felt almost aggressively new — the kind of house that arrives on the market looking as though no one has ever opened a cabinet in anger. At 2,834 square feet, it offered the family the space they needed, with a waterfall-edge kitchen island, a built-in espresso machine and a primary suite that Ms. Reyes described as "honestly kind of embarrassing, in a good way." The upstairs office could have served as a nursery. The downstairs bedroom could have been her mother's. A small deck off the kitchen offered a partial view of Bernal Hill. The commute to Mr. Reyes's office in SoMa would have been, with traffic, about twelve minutes. Listed at $3,995,000, with annual property taxes of approximately $14,200.`,
+    flaw: "Six bathrooms for a family of four struck Mr. Reyes as \"possibly too many bathrooms.\"",
+    votes_choose: [52, 28, 20],
+    votes_bought: [61, 24, 15],
   },
   {
-    id: "25-elsie",
+    num: 2,
+    title: "A Fixer on Elsie, Listed Below Three Million",
     address: "25 Elsie St.",
-    neighborhood: "Bernal Heights, San Francisco",
     listed: "$2,995,000",
     sold: "$4,000,000",
     overAsking: "$1,005,000 over asking",
@@ -34,19 +35,20 @@ const LISTINGS = [
     baths: 3,
     sqft: "2,361",
     yearBuilt: 1988,
+    taxes: "$11,800 a year",
     imgUrl:
       "https://photos.zillowstatic.com/fp/58df6dc5851225d1847c8b746292dcb3-cc_ft_1536.jpg",
     zillowUrl:
       "https://www.zillow.com/homedetails/25-Elsie-St-San-Francisco-CA-94110/15161163_zpid/",
-    description:
-      "A three-bedroom, three-bathroom home from 1988. The master bathroom hadn't been updated since the Clinton administration. The backyard was a project. The list price started with a two.",
-    reaction:
-      "\"It's listed under three million,\" Julia said on the drive over. \"That's almost reasonable.\" There were eleven bids. They were not the highest. The house sold for $4,000,000 — a million and five thousand dollars over asking.",
+    description: `At 2,361 square feet, this three-bedroom, three-bathroom house from 1988 was the most modestly priced option the family seriously considered — which is to say, it was listed at $2,995,000. The primary bathroom had not been updated since what Ms. Reyes called "a very specific era of tile." The backyard, a south-facing rectangle of overgrown potential, would have required work. The bones were good, said Ms. Carmichael, who noted that the lot size and the light were "two things you can't change." A child named Cora, age 2, was set down in the living room during the tour and immediately located a dead moth. Her parents looked at each other over her head with an expression that longtime house hunters will recognize. Listed at $2,995,000, with annual taxes of approximately $11,800.`,
+    flaw: "The layout was, in the words of Ms. Reyes, \"a little mysterious in the middle.\"",
+    votes_choose: [22, 48, 30],
+    votes_bought: [18, 52, 30],
   },
   {
-    id: "1497-shotwell",
+    num: 3,
+    title: "A 1910 Victorian on Shotwell, With Original Details",
     address: "1497 Shotwell St.",
-    neighborhood: "Bernal Heights, San Francisco",
     listed: "$3,499,000",
     sold: "$4,650,000",
     overAsking: "$1,151,000 over asking",
@@ -54,85 +56,131 @@ const LISTINGS = [
     baths: 4,
     sqft: "2,545",
     yearBuilt: 1910,
+    taxes: "$13,100 a year",
     imgUrl:
       "https://photos.zillowstatic.com/fp/5d5bb1ad15fa89fb7f84c0383d60dbbb-cc_ft_1536.jpg",
     zillowUrl:
       "https://www.zillow.com/homedetails/1497-Shotwell-St-San-Francisco-CA-94110/15160090_zpid/",
-    description:
-      "A four-bedroom, four-bathroom Victorian built in 1910, with original built-ins and a claw-foot tub. Julia's grandmother walked past this house every Sunday on her way to St. Anthony's. \"This is the one,\" Julia said.",
-    reaction:
-      "They offered $3,800,000 and wrote a letter — about Bernal Heights, about their parents, about wanting to stay. The house sold for $4,650,000. The winning buyer had also grown up in the neighborhood. This did not help.",
+    description: `Built in 1910 and preserving most of its original millwork, this four-bedroom, four-bathroom Victorian on Shotwell Street offered the kind of character that Ms. Carmichael said she "knew they would respond to." Original built-in bookshelves lined the dining room. The claw-foot tub in the upstairs bathroom prompted Ms. Reyes to photograph it and text the image to her mother, who replied with three exclamation points and a prayer-hands emoji. At 2,545 square feet, the house could accommodate Ms. Reyes's parents for extended visits — the ground-floor bedroom was "practically its own apartment," Ms. Carmichael said. Ms. Reyes noted that her grandmother had walked past this house every Sunday on her way to St. Anthony's. "This is the one," she said, in the kitchen, not yet to her husband. Listed at $3,499,000, with annual taxes of approximately $13,100.`,
+    flaw: "The electrical panel, Mr. Reyes was told, \"had opinions.\"",
+    votes_choose: [26, 24, 50],
+    votes_bought: [21, 26, 53],
   },
 ];
 
-function QuizCard({ listing, index }: { listing: typeof LISTINGS[0]; index: number }) {
-  const [revealed, setRevealed] = useState(false);
+function PollBar({ label, pct, winner, loser }: { label: string; pct: number; winner?: boolean; loser?: boolean }) {
+  return (
+    <div className="mb-2">
+      <div className="flex justify-between text-[12px] font-sans mb-1">
+        <span className={winner ? "font-bold" : ""}>{label} {winner ? "✓" : loser ? "✗" : ""}</span>
+        <span className="text-[#666]">{pct}%</span>
+      </div>
+      <div className="h-2 bg-[#e2e2e2] w-full">
+        <div
+          className={`h-2 ${winner ? "bg-[#121212]" : "bg-[#999]"}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function ListingCard({ listing }: { listing: typeof LISTINGS[0] }) {
+  const [chooseRevealed, setChooseRevealed] = useState(false);
+  const [boughtRevealed, setBoughtRevealed] = useState(false);
 
   return (
-    <div className="my-10 border-t border-[#e2e2e2] pt-8">
-      <p className="text-[11px] uppercase tracking-widest font-sans text-[#666] mb-3">
-        Home {index + 1} of 3
+    <div className="my-10 border-t-2 border-[#121212] pt-6">
+      <p className="text-[11px] uppercase tracking-widest font-sans font-bold text-[#121212] mb-1">
+        No. {listing.num}
       </p>
+      <h3 className="font-playfair font-bold text-2xl mb-4">{listing.title}</h3>
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={listing.imgUrl}
         alt={listing.address}
-        className="w-full object-cover h-72 md:h-96"
+        className="w-full object-cover h-72 md:h-80 mb-1"
       />
-      <p className="text-[11px] text-[#888] font-sans italic mt-1 mb-5">
-        {listing.address}, {listing.neighborhood}. <a href={listing.zillowUrl} target="_blank" rel="noopener noreferrer" className="underline">View on Zillow.</a>
+      <p className="text-[11px] text-[#888] font-sans italic mb-5">
+        {listing.address}, Bernal Heights.{" "}
+        <a href={listing.zillowUrl} target="_blank" rel="noopener noreferrer" className="underline">
+          View on Zillow.
+        </a>
       </p>
 
-      {/* Specs */}
-      <div className="flex flex-wrap gap-x-6 gap-y-1 text-[13px] font-sans text-[#444] mb-4 border-l-2 border-[#121212] pl-4">
-        <span>{listing.beds} bedrooms</span>
-        <span>{listing.baths} bathrooms</span>
-        <span>{listing.sqft} sq ft</span>
-        <span>Built {listing.yearBuilt}</span>
-      </div>
+      <p className="text-[16px] leading-relaxed text-[#333] mb-3">{listing.description}</p>
+      <p className="text-[16px] leading-relaxed text-[#333] italic mb-6">{listing.flaw}</p>
 
-      <p className="text-[16px] leading-relaxed text-[#333] mb-6">{listing.description}</p>
+      {/* Polls */}
+      <div className="bg-[#f7f4ef] border border-[#e2e2e2] p-5 space-y-6">
 
-      {/* Quiz */}
-      <div className="bg-[#f7f4ef] border border-[#e2e2e2] p-5">
-        <div className="flex justify-between items-baseline mb-4">
-          <div>
-            <p className="text-[11px] uppercase tracking-widest font-sans text-[#666]">Listed at</p>
-            <p className="font-playfair font-bold text-2xl">{listing.listed}</p>
-          </div>
-          <div className="text-right">
-            <p className="text-[11px] uppercase tracking-widest font-sans text-[#666]">Sold for</p>
-            {revealed ? (
-              <div>
-                <p className="font-playfair font-bold text-2xl text-red-700">{listing.sold}</p>
-                <p className="text-[11px] font-sans text-red-700 font-semibold mt-0.5">↑ {listing.overAsking}</p>
-              </div>
-            ) : (
-              <button
-                onClick={() => setRevealed(true)}
-                className="font-playfair font-bold text-lg text-[#326891] underline cursor-pointer hover:text-[#121212] transition-colors"
-              >
-                What do you think?
-              </button>
-            )}
-          </div>
+        {/* Poll 1: Which would you choose */}
+        <div>
+          <p className="text-[11px] uppercase tracking-widest font-sans font-bold mb-3">
+            Which Would You Choose?
+          </p>
+          {chooseRevealed ? (
+            <div>
+              {LISTINGS.map((l, i) => (
+                <PollBar
+                  key={l.num}
+                  label={`No. ${l.num}`}
+                  pct={listing.votes_choose[i]}
+                  winner={i === listing.num - 1}
+                />
+              ))}
+            </div>
+          ) : (
+            <button
+              onClick={() => setChooseRevealed(true)}
+              className="w-full bg-[#121212] text-white text-[11px] uppercase tracking-widest font-sans py-2.5 hover:bg-[#333] transition-colors cursor-pointer"
+            >
+              See reader votes
+            </button>
+          )}
         </div>
 
-        {revealed && (
-          <p className="text-[14px] leading-relaxed text-[#444] border-t border-[#e2e2e2] pt-4 mt-2">
-            {listing.reaction}
-          </p>
-        )}
+        {/* Divider */}
+        <div className="border-t border-[#e2e2e2]" />
 
-        {!revealed && (
-          <button
-            onClick={() => setRevealed(true)}
-            className="w-full bg-[#121212] text-white text-[12px] uppercase tracking-widest font-sans py-3 hover:bg-[#333] transition-colors cursor-pointer"
-          >
-            Reveal sale price
-          </button>
-        )}
+        {/* Poll 2: Which did they buy + sale price reveal */}
+        <div>
+          <p className="text-[11px] uppercase tracking-widest font-sans font-bold mb-3">
+            Which Did They Buy?
+          </p>
+          {boughtRevealed ? (
+            <div>
+              {LISTINGS.map((l, i) => (
+                <PollBar
+                  key={l.num}
+                  label={`No. ${l.num}`}
+                  pct={listing.votes_bought[i]}
+                />
+              ))}
+              <div className="mt-4 border-t border-[#e2e2e2] pt-4">
+                <div className="flex justify-between items-baseline">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest font-sans text-[#666]">Listed</p>
+                    <p className="font-playfair font-bold text-xl">{listing.listed}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-[10px] uppercase tracking-widest font-sans text-[#666]">Sold for</p>
+                    <p className="font-playfair font-bold text-xl text-red-700">{listing.sold}</p>
+                    <p className="text-[11px] text-red-700 font-sans font-semibold">↑ {listing.overAsking}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => setBoughtRevealed(true)}
+              className="w-full border border-[#121212] text-[#121212] text-[11px] uppercase tracking-widest font-sans py-2.5 hover:bg-[#121212] hover:text-white transition-colors cursor-pointer"
+            >
+              Reveal sale price
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -148,8 +196,11 @@ function formatDate() {
 }
 
 export default function Home() {
+  const [finalRevealed, setFinalRevealed] = useState(false);
+
   return (
     <div className="max-w-4xl mx-auto px-4">
+
       {/* Masthead */}
       <header className="border-b-4 border-[#121212] pt-5 pb-2 mb-1">
         <div className="flex justify-between items-end text-[11px] font-sans text-[#666] mb-2 uppercase tracking-widest">
@@ -174,52 +225,99 @@ export default function Home() {
         <div className="flex-1 border-t border-[#121212]" />
       </div>
 
-      {/* Article */}
       <article className="max-w-2xl mx-auto">
-        <h2 className="font-playfair font-bold text-4xl md:text-5xl leading-tight mt-4 mb-3">
-          They Grew Up Here. Now They Can&apos;t Afford to Stay.
+
+        {/* Headline & dek */}
+        <p className="text-[11px] uppercase tracking-widest font-sans text-[#666] mt-4 mb-2">By DOROTHEA WAINSCOTT-SMYTHE &nbsp;|&nbsp; {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
+        <h2 className="font-playfair font-bold text-4xl md:text-5xl leading-tight mb-3">
+          Could They Raise Their Children in the Neighborhood Where They Were Raised?
         </h2>
-        <p className="font-fell italic text-xl text-[#444] mb-4 leading-snug">
-          A Bernal Heights family searches for a home in the neighborhood where they were raised — and finds that love of place is no longer a competitive advantage.
+        <p className="font-fell italic text-xl text-[#444] mb-5 leading-snug border-b border-[#e2e2e2] pb-5">
+          With about $4,200,000 to spend, a young Bernal Heights family looked for a four-bedroom home within walking distance of their parents. Here&apos;s what they found.
         </p>
-        <div className="flex items-center gap-4 border-t border-b border-[#e2e2e2] py-2 mb-6">
-          <p className="text-[11px] text-[#666] uppercase tracking-widest font-sans">
-            By DOROTHEA WAINSCOTT-SMYTHE
+
+        {/* Origin story */}
+        <div className="text-[16px] leading-relaxed text-[#333] space-y-4">
+          <p>
+            Marcus Reyes (33) and Julia Reyes (31) met at Mission High School, which is not in Bernal Heights but is of it, in the way that certain institutions belong to a neighborhood by loyalty rather than geography. Mr. Reyes was a junior; Ms. Reyes, a sophomore who had recently transferred and was, she said, &ldquo;trying to figure out the bus situation.&rdquo; Mr. Reyes knew the bus situation. They have been together, in one form or another, ever since.
           </p>
-          <p className="text-[11px] text-[#666] font-sans">
-            {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+          <p>
+            Both grew up on the eastern slope of the hill — Mr. Reyes on Precita Avenue, Ms. Reyes on Eugenia Street, four blocks apart, their childhoods running parallel without quite touching. They left for college (he to U.C. Davis, she to Sonoma State), returned to the city within a year of each other, and eventually landed in a two-bedroom rental on Andover Street, two blocks from Mr. Reyes&apos;s parents and four from Ms. Reyes&apos;s. Their dog, a basset hound named Cortez, occupies most of the couch.
+          </p>
+          <p>
+            Last spring, with their daughter Cora (2) and a second baby on the way, they decided it was time. &ldquo;Our parents are here,&rdquo; Ms. Reyes said. &ldquo;Cora&apos;s godparents are here. We grew up here. We just assumed we&apos;d figure it out.&rdquo; She paused. &ldquo;We had not done the math.&rdquo;
           </p>
         </div>
 
-        <div className="text-[16px] leading-relaxed text-[#333] space-y-5">
+        {/* Reader solicitation box */}
+        <div className="border border-[#e2e2e2] bg-[#f7f4ef] p-4 my-6 text-[12px] font-sans text-[#555]">
+          <strong className="text-[#121212]">Did you recently buy a home in the Bay Area?</strong> We want to hear from you. Email us at{" "}
+          <a href="mailto:theforager@bernaltimes.local" className="underline">theforager@bernaltimes.local</a>.
+          {" "}Want The Forager delivered to your inbox every week?{" "}
+          <a href="#" className="underline">Sign up here.</a>
+        </div>
+
+        {/* Criteria */}
+        <div className="text-[16px] leading-relaxed text-[#333] space-y-4">
           <p>
-            Marcus and Julia Reyes have spent their whole lives on the eastern slope of Bernal Heights. Marcus grew up on Precita Avenue. Julia on Eugenia. They met at Mission High, left for college, came back — as people from Bernal tend to do — and have been renting a two-bedroom on Andover Street for six years, two blocks from Marcus&apos;s parents and four blocks from Julia&apos;s.
+            Pre-approved for a jumbo mortgage and drawing on $800,000 in savings accumulated over six years of two-income San Francisco renting — &ldquo;a sentence,&rdquo; Mr. Reyes noted, &ldquo;that would sound insane anywhere else&rdquo; — the couple set a budget of around $4,200,000 and confined their search to Bernal Heights proper. Must-haves included four bedrooms (one for Cora, one for the new baby, one for visiting grandparents, one for themselves), a yard with enough room for Cortez to stage his daily dramatic collapses, and proximity to the J-Church line for Ms. Reyes&apos;s commute to the Castro.
           </p>
           <p>
-            Last spring, with their daughter Cora turning two and a second baby on the way, they decided it was time to buy. They had $800,000 saved. They were pre-approved for a jumbo loan. Their agent, Sandra, a patient woman who has been selling homes in Bernal Heights for nineteen years, told them the market was &ldquo;active.&rdquo;
+            They were represented by Sandra Carmichael of Vanguard Properties, who has been selling homes in Bernal Heights for nineteen years and has seen, she said, &ldquo;everything the market can do.&rdquo; Ms. Carmichael described her clients as clear-eyed and emotionally prepared. &ldquo;I knew they would only want to see houses that had some character,&rdquo; she said. &ldquo;And I knew they understood the neighborhood. That part was easy.&rdquo;
           </p>
           <p>
-            Below are the three homes they considered. For each one, we&apos;ve listed the asking price. See if you can guess what it actually sold for.
+            Among their options:
           </p>
         </div>
 
-        {LISTINGS.map((listing, i) => (
-          <QuizCard key={listing.id} listing={listing} index={i} />
+        {/* The three listings */}
+        {LISTINGS.map((listing) => (
+          <ListingCard key={listing.num} listing={listing} />
         ))}
 
-        <div className="text-[16px] leading-relaxed text-[#333] space-y-5 mt-4">
-          <p>
-            Marcus and Julia are still on Andover Street. The baby arrived in October — a boy, they named him Leo — and they have converted the dining room into a nursery. Sandra sends them listings when something comes up. The market, she says, remains active.
-          </p>
-          <p>
-            &ldquo;We thought being from here would count for something,&rdquo; Julia said. Outside, a dog barked on the street below — the specific bark of a Bernal Heights dog, lazy and unhurried, the bark of a dog that lives somewhere.
-          </p>
-          <p>&ldquo;It didn&apos;t.&rdquo;</p>
+        {/* The reveal */}
+        <div className="mt-10 border-t-4 border-[#121212] pt-6">
+          <p className="text-[11px] uppercase tracking-widest font-sans font-bold mb-2">Their Home:</p>
+
+          {!finalRevealed ? (
+            <button
+              onClick={() => setFinalRevealed(true)}
+              className="w-full bg-[#121212] text-white font-playfair text-xl py-5 hover:bg-[#333] transition-colors cursor-pointer"
+            >
+              Which did they choose?
+            </button>
+          ) : (
+            <div className="space-y-4 text-[16px] leading-relaxed text-[#333]">
+              <h3 className="font-playfair font-bold text-3xl">None of the Above.</h3>
+              <p>
+                They offered $4,200,000 on No. 1. An all-cash buyer, identity unknown, waived inspection and won at $4,700,000. The house was on the market for five days.
+              </p>
+              <p>
+                On No. 2, they offered $3,500,000 — which Ms. Reyes acknowledged was &ldquo;probably not enough,&rdquo; and which was, in fact, not enough. There were eleven bids. The house sold for $4,000,000, a million and five thousand dollars over asking, to a buyer Ms. Carmichael described only as &ldquo;very motivated.&rdquo;
+              </p>
+              <p>
+                They offered $3,800,000 on No. 3, and wrote a letter. The letter discussed Bernal Heights, their parents, their daughter, their dog, their grandmother&apos;s Sunday walks to St. Anthony&apos;s. Ms. Carmichael submitted it with the offer. The house sold for $4,650,000. The winning buyer, Ms. Carmichael mentioned gently, had also grown up in the neighborhood.
+              </p>
+              <p>
+                &ldquo;For one reason or another,&rdquo; Ms. Carmichael said, &ldquo;a deal can fall apart, so there is always a chance something will come back to us.&rdquo;
+              </p>
+              <p>
+                Marcus and Julia Reyes are still on Andover Street. The baby arrived in October — a boy, Leo (0) — and they have converted the dining room into a nursery. Cortez has taken possession of the vacated Pack &lsquo;n Play. Ms. Carmichael sends listings when she finds them. &ldquo;The market,&rdquo; she has been saying, &ldquo;is very active right now.&rdquo;
+              </p>
+              <p>
+                &ldquo;We thought being from here would count for something,&rdquo; Ms. Reyes said. Outside, a dog barked on the street below — the particular bark of a Bernal Heights dog, lazy and self-possessed, the bark of a dog that lives somewhere.
+              </p>
+              <p>&ldquo;It didn&apos;t.&rdquo;</p>
+            </div>
+          )}
         </div>
 
-        <div className="border-t border-[#e2e2e2] mt-10 pt-4 text-[11px] text-[#888] font-sans">
-          <p><em>This is a work of parody. The Reyes family is fictional. The listing and sale prices are real.</em></p>
+        {/* Email signoff */}
+        <div className="border-t border-[#e2e2e2] mt-10 pt-4 text-[12px] font-sans text-[#888] space-y-1">
+          <p>E-mail: <a href="mailto:theforager@bernaltimes.local" className="underline">theforager@bernaltimes.local</a></p>
+          <p className="mt-3 italic">This is a work of parody. The Reyes family is fictional. The listing and sale prices are real.</p>
         </div>
+
       </article>
 
       <footer className="border-t-2 border-[#121212] mt-10 py-4 text-center text-[10px] text-[#888] uppercase tracking-widest font-sans">
