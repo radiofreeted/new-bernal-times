@@ -217,7 +217,7 @@ export default function Home() {
             Both grew up on the eastern slope of the hill — Mr. Reyes on Precita Avenue, Ms. Reyes on Eugenia Street, four blocks apart, their childhoods running parallel without quite touching. They left for college, returned to the city within a year of each other, and eventually landed in a two-bedroom rental on Andover Street, two blocks from Mr. Reyes&apos;s parents and four from Ms. Reyes&apos;s. Their dog, a basset hound named Cortez, occupies most of the couch.
           </p>
           <p>
-            The decision to buy was accelerated, in February, by an unexpected development: Mr. Reyes won $2,800,000 in the California Lottery. A Powerball ticket purchased at the Valero on Cortland, selected using Cora&apos;s birthday and a number Mr. Reyes described as &ldquo;just a feeling.&rdquo; After taxes, the family cleared approximately $1,900,000 — enough, combined with their existing savings and a pre-approved jumbo loan, to enter the Bernal Heights market as serious buyers. &ldquo;We won the lottery,&rdquo; Ms. Reyes said. &ldquo;Literally. We won the lottery.&rdquo; She let that sit for a moment. &ldquo;And we still weren&apos;t sure it would be enough.&rdquo; It was not enough.
+            The decision to buy was accelerated, in February, by an unexpected development: Mr. Reyes won $2,800,000 in the California Lottery. A Powerball ticket purchased at the Valero on Cortland, selected using Cora&apos;s birthday and a number Mr. Reyes described as &ldquo;just a feeling.&rdquo; After taxes, the family cleared approximately $1,900,000 — enough, combined with their existing savings and a pre-approved jumbo loan, to enter the Bernal Heights market as serious buyers. &ldquo;We won the lottery,&rdquo; Ms. Reyes said. &ldquo;Literally. We won the lottery.&rdquo; She let that sit for a moment. &ldquo;And we still weren&apos;t sure it would be enough.&rdquo;
           </p>
         </div>
 
@@ -299,7 +299,7 @@ export default function Home() {
                 Ms. Carmichael remains optimistic, which is either her greatest professional asset or a diagnosable condition. &ldquo;For one reason or another,&rdquo; she said, &ldquo;a deal can fall apart. There is always a chance something comes back to us.&rdquo; She has been saying this since March. It is now November.
               </p>
               <p>
-                Marcus and Julia Reyes are still on Andover Street. The baby arrived in October — a boy, Leo (0) — and they have converted the dining room into a nursery. Cora has been told she is &ldquo;getting a roommate.&rdquo; Cortez has claimed the vacated Pack &lsquo;n Play. The apartment, at 950 square feet, now houses two adults, two children, and a basset hound who takes up more room than his proportions suggest.
+                Marcus and Julia Reyes are still on Andover Street. The baby arrived in October — a boy, Leo — and they have converted the dining room into a nursery. Cora has been told she is &ldquo;getting a roommate.&rdquo; Cortez has claimed the vacated Pack &lsquo;n Play. The apartment, at 950 square feet, now houses two adults, two children, and a basset hound who takes up more room than his proportions suggest.
               </p>
               <p>
                 Ms. Carmichael sends listings when she finds them. They are never under four million dollars. &ldquo;The market,&rdquo; she continues to say, &ldquo;is very active right now.&rdquo;
