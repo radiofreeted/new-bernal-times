@@ -18,7 +18,7 @@ const LISTINGS = [
     imgUrl: "https://photos.zillowstatic.com/fp/326a23a90ee43a72cae3ec75acef0b52-cc_ft_1536.jpg",
     zillowUrl: "https://www.zillow.com/homedetails/116-Elsie-St-San-Francisco-CA-94110/125164135_zpid/",
     description: `This four-bedroom, six-bathroom home, built in 2018, felt almost aggressively new — the kind of house that arrives on the market looking as though no one has ever opened a cabinet in anger. At 2,834 square feet, it offered the family the space they needed, with a waterfall-edge kitchen island, a built-in espresso machine and a primary suite that Ms. Reyes described as "honestly kind of embarrassing, in a good way." The upstairs office could have served as a nursery. The downstairs bedroom could have been her mother's. A small deck off the kitchen offered a partial view of Bernal Hill. The commute to Mr. Reyes's office in SoMa would have been, with traffic, about twelve minutes. Six bathrooms for a family of four struck Mr. Reyes as "possibly too many bathrooms." Listed at $3,995,000, with annual property taxes of approximately $14,200.`,
-    lossNarrative: `They offered $4,200,000. An all-cash buyer, identity unknown, waived inspection and won at $4,700,000. The house was on the market for five days.`,
+    lossNarrative: `They offered $4,200,000 — a number Mr. Reyes described as "genuinely upsetting to type" — and felt, briefly, good about it. The house received nine offers. The winning bid was $4,700,000, all cash, no contingencies, no inspection, no apparent concern about any of it. The buyer's agent did not write a letter. Ms. Carmichael, to her credit, did not say "I told you so." She said "the market is very competitive right now," which is the same thing.`,
   },
   {
     num: 2,
@@ -35,7 +35,7 @@ const LISTINGS = [
     imgUrl: "https://photos.zillowstatic.com/fp/58df6dc5851225d1847c8b746292dcb3-cc_ft_1536.jpg",
     zillowUrl: "https://www.zillow.com/homedetails/25-Elsie-St-San-Francisco-CA-94110/15161163_zpid/",
     description: `At 2,361 square feet, this three-bedroom, three-bathroom house from 1988 was the most modestly priced option the family seriously considered — which is to say, it was listed at $2,995,000. The primary bathroom had not been updated since what Ms. Reyes called "a very specific era of tile." The backyard, a south-facing rectangle of overgrown potential, would have required work. The bones were good, said Ms. Carmichael, who noted that the lot size and the light were "two things you can't change." The layout was, in the words of Ms. Reyes, "a little mysterious in the middle." A child named Cora, age 2, was set down in the living room during the tour and immediately located a dead moth. Her parents looked at each other over her head with an expression that longtime house hunters will recognize. Listed at $2,995,000, with annual taxes of approximately $11,800.`,
-    lossNarrative: `They offered $3,500,000. There were eleven bids. The house sold for $4,000,000, a million and five thousand dollars over asking, to a buyer Ms. Carmichael described only as "very motivated."`,
+    lossNarrative: `The list price started with a two. This felt meaningful. They toured on a Sunday, made an offer by Tuesday, and were informed by Thursday that there had been eleven bids and they had not been among the interesting ones. The house sold for $4,000,000 — a million and five thousand dollars over a number that already had three million in it — to a buyer Ms. Carmichael described, with characteristic diplomacy, as "well-positioned." Mr. Reyes asked what that meant. Ms. Carmichael said it meant cash.`,
   },
   {
     num: 3,
@@ -52,7 +52,7 @@ const LISTINGS = [
     imgUrl: "https://photos.zillowstatic.com/fp/5d5bb1ad15fa89fb7f84c0383d60dbbb-cc_ft_1536.jpg",
     zillowUrl: "https://www.zillow.com/homedetails/1497-Shotwell-St-San-Francisco-CA-94110/15160090_zpid/",
     description: `Built in 1910 and preserving most of its original millwork, this four-bedroom, four-bathroom Victorian on Shotwell Street offered the kind of character that Ms. Carmichael said she "knew they would respond to." Original built-in bookshelves lined the dining room. The claw-foot tub in the upstairs bathroom prompted Ms. Reyes to photograph it and text the image to her mother, who replied with three exclamation points and a prayer-hands emoji. At 2,545 square feet, the house could accommodate Ms. Reyes's parents for extended visits — the ground-floor bedroom was "practically its own apartment," Ms. Carmichael said. Ms. Reyes noted that her grandmother had walked past this house every Sunday on her way to St. Anthony's. "This is the one," she said, in the kitchen, not yet to her husband. The electrical panel, Mr. Reyes was told, "had opinions." Listed at $3,499,000, with annual taxes of approximately $13,100.`,
-    lossNarrative: `They offered $3,800,000 and wrote a letter — about Bernal Heights, about their parents, about wanting to stay. The house sold for $4,650,000. The winning buyer, Ms. Carmichael mentioned gently, had also grown up in the neighborhood.`,
+    lossNarrative: `They offered $3,800,000 and, at Ms. Carmichael's suggestion, wrote a letter. It was a good letter. It mentioned the hill, the grandparents, St. Anthony's, Cortez the basset hound. Ms. Reyes cried a little writing it, which she had not planned to do. The sellers received fourteen offers. The house sold for $4,650,000 — $1,151,000 over asking — to a buyer who, Ms. Carmichael mentioned, had also grown up in the neighborhood. He did not write a letter. He did not need to. "Letters are lovely," Ms. Carmichael said, later, carefully. "They don't appraise."`,
   },
 ];
 
@@ -286,7 +286,7 @@ export default function Home() {
             <p className="font-fell italic text-lg text-[#888]">Vote in both polls above to see what happened.</p>
           ) : (
             <div className="space-y-4 text-[16px] leading-relaxed text-[#333]">
-              <h3 className="font-playfair font-bold text-3xl">None of the Above.</h3>
+              <h3 className="font-playfair font-bold text-3xl">None of the Above. Not Even Close.</h3>
               {LISTINGS.map((l) => (
                 <div key={l.num} className="border-l-2 border-[#e2e2e2] pl-4 py-1">
                   <p className="text-[11px] uppercase tracking-widest font-sans font-bold text-[#666] mb-1">
@@ -296,13 +296,16 @@ export default function Home() {
                 </div>
               ))}
               <p>
-                &ldquo;For one reason or another,&rdquo; Ms. Carmichael said, &ldquo;a deal can fall apart, so there is always a chance something will come back to us.&rdquo;
+                Ms. Carmichael remains optimistic, which is either her greatest professional asset or a diagnosable condition. &ldquo;For one reason or another,&rdquo; she said, &ldquo;a deal can fall apart. There is always a chance something comes back to us.&rdquo; She has been saying this since March. It is now November.
               </p>
               <p>
-                Marcus and Julia Reyes are still on Andover Street. The baby arrived in October — a boy, Leo (0) — and they have converted the dining room into a nursery. Cortez has taken possession of the vacated Pack &lsquo;n Play. Ms. Carmichael sends listings when she finds them. &ldquo;The market,&rdquo; she has been saying, &ldquo;is very active right now.&rdquo;
+                Marcus and Julia Reyes are still on Andover Street. The baby arrived in October — a boy, Leo (0) — and they have converted the dining room into a nursery. Cora has been told she is &ldquo;getting a roommate.&rdquo; Cortez has claimed the vacated Pack &lsquo;n Play. The apartment, at 950 square feet, now houses two adults, two children, and a basset hound who takes up more room than his proportions suggest.
               </p>
               <p>
-                &ldquo;We thought being from here would count for something,&rdquo; Ms. Reyes said. Outside, a dog barked on the street below — the particular bark of a Bernal Heights dog, lazy and self-possessed, the bark of a dog that lives somewhere.
+                Ms. Carmichael sends listings when she finds them. They are never under four million dollars. &ldquo;The market,&rdquo; she continues to say, &ldquo;is very active right now.&rdquo;
+              </p>
+              <p>
+                &ldquo;We thought being from here would count for something,&rdquo; Ms. Reyes said. She was sitting on the floor of the dining room-nursery, assembling a crib that had not come with enough screws. Outside, somewhere on the block, a dog was barking — the particular bark of a Bernal Heights dog, lazy and proprietary, the bark of an animal that has somewhere to be.
               </p>
               <p>&ldquo;It didn&apos;t.&rdquo;</p>
             </div>
