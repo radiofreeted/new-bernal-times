@@ -1,9 +1,4 @@
 import { Redis } from "@upstash/redis";
-
-const kv = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-});
 import { NextRequest, NextResponse } from "next/server";
 
 const VALID_POLLS = ["choose", "bought"] as const;
@@ -11,6 +6,28 @@ const VALID_OPTIONS = [1, 2, 3] as const;
 
 type Poll = (typeof VALID_POLLS)[number];
 type Option = (typeof VALID_OPTIONS)[number];
+
+function getRedis() {
+  // Upstash via Vercel marketplace can use several different env var names
+  const url =
+    process.env.UPSTASH_REDIS_REST_URL ||
+    process.env.KV_REST_API_URL ||
+    process.env.REDIS_URL;
+  const token =
+    process.env.UPSTASH_REDIS_REST_TOKEN ||
+    process.env.KV_REST_API_TOKEN ||
+    process.env.REDIS_TOKEN;
+
+  if (!url || !token) {
+    const found = Object.keys(process.env).filter((k) =>
+      k.toLowerCase().includes("redis") || k.toLowerCase().includes("upstash") || k.startsWith("KV_")
+    );
+    throw new Error(
+      `Missing Redis credentials. Env vars found: ${found.join(", ") || "none"}`
+    );
+  }
+  return new Redis({ url, token });
+}
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -25,8 +42,8 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const key = `forager:${poll}:${option}`;
-    await kv.incr(key);
+    const kv = getRedis();
+    await kv.incr(`forager:${poll}:${option}`);
 
     const counts = await Promise.all(
       VALID_OPTIONS.map((o) => kv.get<number>(`forager:${poll}:${o}`))
@@ -38,10 +55,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ totals, percentages, sum, yourVote: option });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
-    console.error("KV error:", message);
-    return NextResponse.json(
-      { error: "Storage unavailable. Is Vercel KV connected?", detail: message },
-      { status: 503 }
-    );
+    console.error("Vote error:", message);
+    return NextResponse.json({ error: message }, { status: 503 });
   }
 }
