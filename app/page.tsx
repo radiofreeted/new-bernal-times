@@ -141,7 +141,7 @@ export default function Home() {
   const [chooseResults, setChooseResults] = useState<PollResults | null>(null);
   const [boughtResults, setBoughtResults] = useState<PollResults | null>(null);
   const [voting, setVoting] = useState(false);
-  const [finalRevealed, setFinalRevealed] = useState(false);
+  const finalRevealed = chooseResults !== null && boughtResults !== null;
   const [voteError, setVoteError] = useState<string | null>(null);
 
   async function handleVote(poll: string, option: number) {
@@ -283,12 +283,7 @@ export default function Home() {
         <div className="mt-8 border-t-4 border-[#121212] pt-6">
           <p className="text-[11px] uppercase tracking-widest font-sans font-bold mb-3">Their Home:</p>
           {!finalRevealed ? (
-            <button
-              onClick={() => setFinalRevealed(true)}
-              className="w-full bg-[#121212] text-white font-playfair text-xl py-5 hover:bg-[#333] transition-colors cursor-pointer"
-            >
-              What happened?
-            </button>
+            <p className="font-fell italic text-lg text-[#888]">Vote in both polls above to see what happened.</p>
           ) : (
             <div className="space-y-4 text-[16px] leading-relaxed text-[#333]">
               <h3 className="font-playfair font-bold text-3xl">None of the Above.</h3>
