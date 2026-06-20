@@ -19,16 +19,24 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid option" }, { status: 400 });
   }
 
-  const key = `forager:${poll}:${option}`;
-  const total = await kv.incr(key);
+  try {
+    const key = `forager:${poll}:${option}`;
+    await kv.incr(key);
 
-  // Return all counts for this poll
-  const counts = await Promise.all(
-    VALID_OPTIONS.map((o) => kv.get<number>(`forager:${poll}:${o}`))
-  );
-  const totals = counts.map((c) => c ?? 0);
-  const sum = totals.reduce((a, b) => a + b, 0);
-  const percentages = totals.map((c) => (sum > 0 ? Math.round((c / sum) * 100) : 0));
+    const counts = await Promise.all(
+      VALID_OPTIONS.map((o) => kv.get<number>(`forager:${poll}:${o}`))
+    );
+    const totals = counts.map((c) => c ?? 0);
+    const sum = totals.reduce((a, b) => a + b, 0);
+    const percentages = totals.map((c) => (sum > 0 ? Math.round((c / sum) * 100) : 0));
 
-  return NextResponse.json({ totals, percentages, sum, yourVote: option });
+    return NextResponse.json({ totals, percentages, sum, yourVote: option });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("KV error:", message);
+    return NextResponse.json(
+      { error: "Storage unavailable. Is Vercel KV connected?", detail: message },
+      { status: 503 }
+    );
+  }
 }

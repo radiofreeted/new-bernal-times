@@ -142,9 +142,11 @@ export default function Home() {
   const [boughtResults, setBoughtResults] = useState<PollResults | null>(null);
   const [voting, setVoting] = useState(false);
   const [finalRevealed, setFinalRevealed] = useState(false);
+  const [voteError, setVoteError] = useState<string | null>(null);
 
   async function handleVote(poll: string, option: number) {
     setVoting(true);
+    setVoteError(null);
     try {
       const res = await fetch("/api/vote", {
         method: "POST",
@@ -152,10 +154,14 @@ export default function Home() {
         body: JSON.stringify({ poll, option }),
       });
       const data = await res.json();
+      if (!res.ok) {
+        setVoteError(data.detail ?? data.error ?? "Vote failed");
+        return;
+      }
       if (poll === "choose") setChooseResults(data);
       else setBoughtResults(data);
     } catch (e) {
-      console.error(e);
+      setVoteError(e instanceof Error ? e.message : "Network error");
     } finally {
       setVoting(false);
     }
@@ -252,6 +258,11 @@ export default function Home() {
 
         {/* Polls */}
         <div className="border-t-2 border-[#121212] pt-6 space-y-4">
+        {voteError && (
+          <div className="bg-red-50 border border-red-200 text-red-700 text-[12px] font-sans p-3">
+            <strong>Voting error:</strong> {voteError}
+          </div>
+        )}
           <Poll
             poll="choose"
             question="Which Would You Choose?"
